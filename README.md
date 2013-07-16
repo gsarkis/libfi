@@ -1,6 +1,5 @@
-# LibFi - Fixed-point C++ library
+# LibFi - A fixed-point arithmetic library.
 
-----
 ## What is LibFi?
 
 LibFi is a binary fixed-point arithmetic library for C++, focusing on flexibility and correctness. It is intended to be used for modeling hardware systems. LibFi is template-based and is a header-only library.
@@ -27,10 +26,8 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-----
 ## Documentation
 LibFi is documented using Doxygen. To build the documentation, you need [Doxygen](http://www.doxygen.org). In the library's root directory, run `doxygen`. The documentation will be available in `doc/html/index.html`.
 
-----
 ## Changelog
 * 2013-07-02 v1.0: First public release of LibFi.
