@@ -29,5 +29,9 @@ int main(int argc, char* argv[]) {
 ## Documentation
 LibFi is documented using Doxygen. To build the documentation, you need [Doxygen](http://www.doxygen.org). In the library's root directory, run `doxygen`. The documentation will be available in `doc/html/index.html`.
 
+## External References
+* [MATLAB Fixed-Point Designer Toolbox](http://www.mathworks.com/help/fixedpoint/ref/_f46184.html)
+* [C++ Binary Fixed-Point Arithmetic Library Proposal](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3352.html)
+
 ## Changelog
 * 2013-07-02 v1.0: First public release of LibFi.
