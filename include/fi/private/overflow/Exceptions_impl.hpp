@@ -23,13 +23,13 @@
 #define FI_PRIVATE_OVERFLOW_EXCEPTION_HPP
 
 namespace Fi {
-  inline PositiveOverflow::PositiveOverflow(const std::string& what_arg)
-    : std::overflow_error(what_arg)
-  { }
+	inline PositiveOverflow::PositiveOverflow(const std::string& what_arg)
+		: std::overflow_error(what_arg)
+	{ }
 
-  inline NegativeOverflow::NegativeOverflow(const std::string& what_arg)
-    : std::overflow_error(what_arg)
-  { }
+	inline NegativeOverflow::NegativeOverflow(const std::string& what_arg)
+		: std::overflow_error(what_arg)
+	{ }
 
 }
 

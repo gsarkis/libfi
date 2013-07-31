@@ -25,11 +25,11 @@
 #define FI_CONC(a, b) a ## b
 #define FI_CONC2(a, b) FI_CONC(a, b)
 
-#define FI_STATIC_ASSERT_W_F(x) typename \
+#define FI_STATIC_ASSERT_W_F(x) typename	  \
 	Fi::AssertionFailure<sizeof(Fi::W_Must_Be_Greater_than_or_Equal_to_F<(x)==0?false:true>)> \
 	FI_CONC2(AssertionValtype, __LINE__)
 
-#define FI_STATIC_ASSERT_W_33(x) typename \
+#define FI_STATIC_ASSERT_W_33(x) typename	  \
 	Fi::AssertionFailure<sizeof(Fi::W_Must_Be_Less_than_33<(x) == 0 ? false : true>)> \
 	FI_CONC2(AssertionValtype, __LINE__)
 

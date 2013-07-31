@@ -28,63 +28,63 @@
 #include <string>
 
 namespace Fi {
-  /**
-   *\ingroup overflow
-   *\brief An overflow exception handler.
+	/**
+	 *\ingroup overflow
+	 *\brief An overflow exception handler.
 
-   *If overflow occurs, an exception is thrown..
+	 *If overflow occurs, an exception is thrown..
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Throw {
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Throw {
 
-    /**
-     *\internal
-     *\brief Throw an exception due to positive overflow.
-     *
-     *\param n Integer representing a fixed-point number.
-     *\return The number provided in \c n.
-     *\throws std::overflow_error
-     */
-    static typename T::valtype positiveOverflow(const typename T::valtype& n);
+		/**
+		 *\internal
+		 *\brief Throw an exception due to positive overflow.
+		 *
+		 *\param n Integer representing a fixed-point number.
+		 *\return The number provided in \c n.
+		 *\throws std::overflow_error
+		 */
+		static typename T::valtype positiveOverflow(const typename T::valtype& n);
 
-    /**
-     *\internal
-     *\brief Throw an exception due to negative overflow.
-     *
-     *\param n Integer representing a fixed-point number.
-     *\return The number provided in \c n.
-     *\throws std::overflow_error
-     */
-    static typename T::valtype negativeOverflow(const typename T::valtype& n);
+		/**
+		 *\internal
+		 *\brief Throw an exception due to negative overflow.
+		 *
+		 *\param n Integer representing a fixed-point number.
+		 *\return The number provided in \c n.
+		 *\throws std::overflow_error
+		 */
+		static typename T::valtype negativeOverflow(const typename T::valtype& n);
 
-  };
+	};
 
-  /**\internal
-   *\brief A specialization to retrieve information about the overflow handler.
-   */
-  template<>
-  struct Throw<Fi::Info> {
-    static const std::size_t WIDTH_MULT = 2;
-  };
+	/**\internal
+	 *\brief A specialization to retrieve information about the overflow handler.
+	 */
+	template<>
+	struct Throw<Fi::Info> {
+		static const std::size_t WIDTH_MULT = 2;
+	};
 
 
-  template<typename T>
-  inline typename T::valtype Throw<T>::
-  positiveOverflow(const typename T::valtype& /*n*/) {
+	template<typename T>
+	inline typename T::valtype Throw<T>::
+	positiveOverflow(const typename T::valtype& /*n*/) {
 
-    throw Fi::PositiveOverflow("Positive overflow!");
+		throw Fi::PositiveOverflow("Positive overflow!");
 
-  }
+	}
 
-  template<typename T>
-  inline typename T::valtype Throw<T>::
-  negativeOverflow(const typename T::valtype& /*n*/) {
+	template<typename T>
+	inline typename T::valtype Throw<T>::
+	negativeOverflow(const typename T::valtype& /*n*/) {
 
-    throw Fi::NegativeOverflow("negative overflow!");
+		throw Fi::NegativeOverflow("negative overflow!");
 
-  }
+	}
 
 }
 

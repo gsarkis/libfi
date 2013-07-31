@@ -18,17 +18,17 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_PRIVATE_INFO
 #define FI_PRIVATE_INFO
 
 namespace Fi {
-  /**\internal
-   *\brief A type passed to templates when only information, not 
-   *functionality, is needed.
-   */
-  struct Info { };
+	/**\internal
+	 *\brief A type passed to templates when only information, not
+	 *functionality, is needed.
+	 */
+	struct Info { };
 
 }
 

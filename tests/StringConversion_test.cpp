@@ -16,7 +16,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #include "fi/private/StringConversion.hpp"
 #include "fi/Fixed.hpp"
@@ -35,27 +35,27 @@ BOOST_AUTO_TEST_SUITE( to_string )
 BOOST_AUTO_TEST_CASE( fractional )
 {
 
-  typedef Fi::Traits<8, 8, 8, Fi::UNSIGNED> TR888U;
+	typedef Fi::Traits<8, 8, 8, Fi::UNSIGNED> TR888U;
 
-  BOOST_CHECK_EQUAL( fractionalString<TR888U>(0xFF), "99609375" );
-  BOOST_CHECK_EQUAL( fractionalString<TR888U>(0x80), "5" );
+	BOOST_CHECK_EQUAL( fractionalString<TR888U>(0xFF), "99609375" );
+	BOOST_CHECK_EQUAL( fractionalString<TR888U>(0x80), "5" );
 
-  typedef Fi::Traits<8, 8, 8, Fi::SIGNED> TR888S;
+	typedef Fi::Traits<8, 8, 8, Fi::SIGNED> TR888S;
 
-  //-1 = 0xFF. GCC was complaining about this.
-  BOOST_CHECK_EQUAL( fractionalString<TR888S>(-1), "00390625" );
-  //-128 = 0x80. GCC was complaining about this.
-  BOOST_CHECK_EQUAL( fractionalString<TR888S>(-128), "5" );
+	//-1 = 0xFF. GCC was complaining about this.
+	BOOST_CHECK_EQUAL( fractionalString<TR888S>(-1), "00390625" );
+	//-128 = 0x80. GCC was complaining about this.
+	BOOST_CHECK_EQUAL( fractionalString<TR888S>(-128), "5" );
 
 }
 
 BOOST_AUTO_TEST_CASE( from_string )
 {
 
-  typedef Fi::Traits<8, 8, 8, Fi::SIGNED> TR888S;
-  
-  BOOST_CHECK_EQUAL( (unsigned char)((fromString<TR888S>("-0.5")).first) , 0x80 );
-  BOOST_CHECK_EQUAL( (unsigned char)((fromString<TR888S>("7.9375")).first) , 0xF0 );
+	typedef Fi::Traits<8, 8, 8, Fi::SIGNED> TR888S;
+
+	BOOST_CHECK_EQUAL( (unsigned char)((fromString<TR888S>("-0.5")).first) , 0x80 );
+	BOOST_CHECK_EQUAL( (unsigned char)((fromString<TR888S>("7.9375")).first) , 0xF0 );
 
 }
 

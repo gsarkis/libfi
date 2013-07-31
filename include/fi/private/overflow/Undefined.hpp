@@ -17,7 +17,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_PRIVATE_OVERFLOW_UNDEFINED_HPP
 #define FI_PRIVATE_OVERFLOW_UNDEFINED_HPP
@@ -30,73 +30,73 @@
 
 namespace Fi {
 
-  /**
-   *\ingroup overflow
-   *\brief Optimized for speed, the actual behavior depends on the 
-   *compiler and underlying system.
+	/**
+	 *\ingroup overflow
+	 *\brief Optimized for speed, the actual behavior depends on the
+	 *compiler and underlying system.
 
-   *\warning The programmer is willing to accept undefined behavior 
-   *in the event of an overflow.
+	 *\warning The programmer is willing to accept undefined behavior
+	 *in the event of an overflow.
 
-   *\note Currently, the only advantage to use using this over other
-   *overflow handler is a minor speed improvement.
+	 *\note Currently, the only advantage to use using this over other
+	 *overflow handler is a minor speed improvement.
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Undefined {
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Undefined {
 
-    /**
-     *\internal
-     *\brief Positive overflow from an integer type representing
-     *a fixed-point number.
-     *
-     *\param n Integer representing a fixed-point number.
-     *\return The number.
-     *\warning The programmer is willing to accept undefined behavior 
-     *in the event of an overflow.
-     */
-    static typename T::valtype positiveOverflow(const typename T::valtype& n);
+		/**
+		 *\internal
+		 *\brief Positive overflow from an integer type representing
+		 *a fixed-point number.
+		 *
+		 *\param n Integer representing a fixed-point number.
+		 *\return The number.
+		 *\warning The programmer is willing to accept undefined behavior
+		 *in the event of an overflow.
+		 */
+		static typename T::valtype positiveOverflow(const typename T::valtype& n);
 
-    /**
-     *\internal
-     *\brief Handle negative overflow from an integer type representing
-     *a fixed-point number.
-     *
-     *\param n Integer representing a fixed-point number.
-     *\return The number.
-     *\warning The programmer is willing to accept undefined behavior 
-     *in the event of an overflow.
-     */
-    static typename T::valtype negativeOverflow(const typename T::valtype& n);
+		/**
+		 *\internal
+		 *\brief Handle negative overflow from an integer type representing
+		 *a fixed-point number.
+		 *
+		 *\param n Integer representing a fixed-point number.
+		 *\return The number.
+		 *\warning The programmer is willing to accept undefined behavior
+		 *in the event of an overflow.
+		 */
+		static typename T::valtype negativeOverflow(const typename T::valtype& n);
 
-  };
+	};
 
-  /**\internal
-   *\brief A specialization to retrieve information about the overflow handler.
-   */
-  template<>
-  struct Undefined<Fi::Info> {
-    static const std::size_t WIDTH_MULT = 2;
-  };
+	/**\internal
+	 *\brief A specialization to retrieve information about the overflow handler.
+	 */
+	template<>
+	struct Undefined<Fi::Info> {
+		static const std::size_t WIDTH_MULT = 2;
+	};
 
-  template<typename T>
-  inline typename T::valtype Undefined<T>::
-  positiveOverflow(const typename T::valtype& n) {
+	template<typename T>
+	inline typename T::valtype Undefined<T>::
+	positiveOverflow(const typename T::valtype& n) {
 
-    return n;
+		return n;
 
-  }
+	}
 
-  template<typename T>
-  inline typename T::valtype Undefined<T>::
-  negativeOverflow(const typename T::valtype& n) {
+	template<typename T>
+	inline typename T::valtype Undefined<T>::
+	negativeOverflow(const typename T::valtype& n) {
 
-    return n;
+		return n;
 
-  }
+	}
 
-  
+
 }
 
 #endif

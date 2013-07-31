@@ -17,7 +17,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_PRIVATE_OVERFLOW_SATURATE_HPP
 #define FI_PRIVATE_OVERFLOW_SATURATE_HPP
@@ -29,64 +29,64 @@
 
 namespace Fi {
 
-  /**
-   *\ingroup overflow
-   *\brief A saturating overflow handler.
+	/**
+	 *\ingroup overflow
+	 *\brief A saturating overflow handler.
 
-   *If overflow occurs, the assigned value is set to nearest representable
-   *value.
+	 *If overflow occurs, the assigned value is set to nearest representable
+	 *value.
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Saturate {
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Saturate {
 
-    /**
-     *\internal
-     *\brief Handle positive overflow from an integer type representing
-     *a fixed-point number.
-     *
-     *\param n Integer representing a fixed-point number.
-     *\return The number after saturation is applied.
-     */
-    static typename T::valtype positiveOverflow(const typename T::valtype& n);
+		/**
+		 *\internal
+		 *\brief Handle positive overflow from an integer type representing
+		 *a fixed-point number.
+		 *
+		 *\param n Integer representing a fixed-point number.
+		 *\return The number after saturation is applied.
+		 */
+		static typename T::valtype positiveOverflow(const typename T::valtype& n);
 
-    /**
-     *\internal
-     *\brief Handle negative overflow from an integer type representing
-     *a fixed-point number.
-     *
-     *\param n Integer representing a fixed-point number.
-     *\return The number after saturation is applied.
-     */
-    static typename T::valtype negativeOverflow(const typename T::valtype& n);
+		/**
+		 *\internal
+		 *\brief Handle negative overflow from an integer type representing
+		 *a fixed-point number.
+		 *
+		 *\param n Integer representing a fixed-point number.
+		 *\return The number after saturation is applied.
+		 */
+		static typename T::valtype negativeOverflow(const typename T::valtype& n);
 
-  };
+	};
 
 
-  /**\internal
-   *\brief A specialization to retrieve information about the overflow handler.
-   */
-  template<>
-  struct Saturate<Fi::Info> {
-    static const std::size_t WIDTH_MULT = 2;
-  };
+	/**\internal
+	 *\brief A specialization to retrieve information about the overflow handler.
+	 */
+	template<>
+	struct Saturate<Fi::Info> {
+		static const std::size_t WIDTH_MULT = 2;
+	};
 
-  template<typename T>
-  inline typename T::valtype Saturate<T>::
-  positiveOverflow(const typename T::valtype& /*n*/) {
+	template<typename T>
+	inline typename T::valtype Saturate<T>::
+	positiveOverflow(const typename T::valtype& /*n*/) {
 
-    return T::MAX_VAL;
+		return T::MAX_VAL;
 
-  }
+	}
 
-  template<typename T>
-  inline typename T::valtype Saturate<T>::
-  negativeOverflow(const typename T::valtype& /*n*/) {
+	template<typename T>
+	inline typename T::valtype Saturate<T>::
+	negativeOverflow(const typename T::valtype& /*n*/) {
 
-    return T::MIN_VAL;
+		return T::MIN_VAL;
 
-  }
+	}
 
 }
 

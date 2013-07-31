@@ -17,7 +17,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 /**
  *\defgroup overflow Overflow
@@ -48,4 +48,4 @@
 
  LibFi provides the fixed-point type Fi::Fixed and is header only.
 
- */
+*/

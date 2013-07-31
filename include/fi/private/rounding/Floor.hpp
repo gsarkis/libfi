@@ -17,7 +17,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_PRIVATE_ROUNDING_FLOOR_HPP
 #define FI_PRIVATE_ROUNDING_FLOOR_HPP
@@ -32,53 +32,53 @@
 
 namespace Fi {
 
-/**
- *\ingroup rounding
- *\brief Round towards negative infinity.
+	/**
+	 *\ingroup rounding
+	 *\brief Round towards negative infinity.
 
- *A value is rounded towards negative infinity. Also known as floor
- *or negative.
+	 *A value is rounded towards negative infinity. Also known as floor
+	 *or negative.
 
- *Always assumes that T::FRACTION_LENGTH bits will be rounded away.
+	 *Always assumes that T::FRACTION_LENGTH bits will be rounded away.
 
- *\tparam T Fi::Traits of the fixed-point type.
- */
-  template <typename T>
-  struct Floor {
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Floor {
 
-    /**\internal
-     *\brief Round a number towards negative infinity.
-     *\param n Fixed-point number to be rounded.
-     *\return The rounded value and -1 indicating.
-     *that numbers can increase in value as a result of rounding,
-     *or 0 if the input is 0.
-     */
-	  static std::pair<typename T::valtype, int>
-	  round(const typename T::valtype& n);
+		/**\internal
+		 *\brief Round a number towards negative infinity.
+		 *\param n Fixed-point number to be rounded.
+		 *\return The rounded value and -1 indicating.
+		 *that numbers can increase in value as a result of rounding,
+		 *or 0 if the input is 0.
+		 */
+		static std::pair<typename T::valtype, int>
+		round(const typename T::valtype& n);
 
-    /**\internal
-     *\brief Round a number towards negative infinity.
-     *\param fl Original floating-point number.
-     *\param n Fixed-point number to be rounded.
-     *\return The rounded value and 1 indicating.
-     *that numbers can increase in value as a result of rounding,
-     *or 0 if the input is 0.
-     */
-    static std::pair<typename T::valtype, int>
-    round(double fl, const typename T::valtype& n);
+		/**\internal
+		 *\brief Round a number towards negative infinity.
+		 *\param fl Original floating-point number.
+		 *\param n Fixed-point number to be rounded.
+		 *\return The rounded value and 1 indicating.
+		 *that numbers can increase in value as a result of rounding,
+		 *or 0 if the input is 0.
+		 */
+		static std::pair<typename T::valtype, int>
+		round(double fl, const typename T::valtype& n);
 
-    /**\internal
-     *\brief Round a number towards negative infinity.
-     *\param str Original string representation of number.
-     *\param n Fixed-point number to be rounded.
-     *\return The rounded value and 1 indicating.
-     *that numbers can increase in value as a result of rounding,
-     *or 0 if the input is 0.
-     */
-    static std::pair<typename T::valtype, int>
-    round(const std::string& str, const typename T::valtype& n);
+		/**\internal
+		 *\brief Round a number towards negative infinity.
+		 *\param str Original string representation of number.
+		 *\param n Fixed-point number to be rounded.
+		 *\return The rounded value and 1 indicating.
+		 *that numbers can increase in value as a result of rounding,
+		 *or 0 if the input is 0.
+		 */
+		static std::pair<typename T::valtype, int>
+		round(const std::string& str, const typename T::valtype& n);
 
-  };
+	};
 
 }
 
@@ -94,13 +94,13 @@ round(const typename T::valtype& n) {
 
 		direction = -1;
 
-  
+
 		if ((n & T::F_MASK) != 0) {
 			direction = -1;
 		}
 
 	}
-  return std::make_pair(ret, direction);
+	return std::make_pair(ret, direction);
 
 }
 
@@ -112,12 +112,12 @@ round(double fl, const typename T::valtype& n) {
 
 	typename T::valtype ret = n >> T::FRACTION_LENGTH;
 
-  if ((direction == -1) &&
-      DoubleConversion::toDouble<T>(ret) > fl) {
-	  ret -= 1;
-  }
+	if ((direction == -1) &&
+	    DoubleConversion::toDouble<T>(ret) > fl) {
+		ret -= 1;
+	}
 
-  return std::make_pair(ret, direction);
+	return std::make_pair(ret, direction);
 
 }
 
@@ -129,12 +129,12 @@ round(const std::string& str, const typename T::valtype& n) {
 
 	typename T::valtype ret = n >> T::FRACTION_LENGTH;
 
-  if ((direction == -1) &&
-      StringMath::greater(StringConversion::toString<T>(ret), str)) {
-	  ret -= 1;
-  }
+	if ((direction == -1) &&
+	    StringMath::greater(StringConversion::toString<T>(ret), str)) {
+		ret -= 1;
+	}
 
-  return std::make_pair(ret, direction);
+	return std::make_pair(ret, direction);
 
 }
 

@@ -35,30 +35,30 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	Fixed<W, F, S, OF, R>::Fixed() 
-		: _val(0) 
+	Fixed<W, F, S, OF, R>::Fixed()
+		: _val(0)
 	{ }
 
 
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	Fixed<W, F, S, OF, R>::Fixed(const Fixed<W, F, S, OF, R>& a) 
-		: _val(a._val) 
+	Fixed<W, F, S, OF, R>::Fixed(const Fixed<W, F, S, OF, R>& a)
+		: _val(a._val)
 	{ }
 
 
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	Fixed<W, F, S, OF, R>::Fixed(double f) 
+	Fixed<W, F, S, OF, R>::Fixed(double f)
 	{
 
 		typename TR::SignedType s = DoubleConversion::toFixedPoint<TR>(f);
 
 		std::pair<valtype, int> rounded =
 			RH::round(f, static_cast<valtype>(s));
-		double roundAmnt = 
+		double roundAmnt =
 			static_cast<double>(rounded.second)/std::pow(2.0, FRACTION_LENGTH);
 
 		_val = OFH::fromDouble(f, rounded.first, roundAmnt);
@@ -90,7 +90,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	template<std::size_t W2, std::size_t F2, Signedness S2, 
+	template<std::size_t W2, std::size_t F2, Signedness S2,
 	         template <typename> class OF2,
 	         template <typename> class R2>
 	Fixed<W, F, S, OF, R>
@@ -177,7 +177,7 @@ namespace Fi {
 	Fixed<W, F, S, OF, R>& Fixed<W, F, S, OF, R>::
 	operator*=(const Fixed<W, F, S, OF, R>& x) {
 
-		//Since overflow behavior is undefined for OverflowImpossible 
+		//Since overflow behavior is undefined for OverflowImpossible
 		//and all other overflow mechanisms guarantee 2W bits for internal
 		//type, it is ok to not explicitly use a larger type.
 		_val *= x._val;
@@ -194,8 +194,8 @@ namespace Fi {
 	Fixed<W, F, S, OF, R>& Fixed<W, F, S, OF, R>::
 	operator/=(const Fixed<W, F, S, OF, R>& x) {
 
-		//Since overflow behavior is undefined for OverflowImpossible and 
-		//all other overflow mechanisms guarantee 2W bits for internal type, 
+		//Since overflow behavior is undefined for OverflowImpossible and
+		//all other overflow mechanisms guarantee 2W bits for internal type,
 		//it is ok to not explicitly use a larger type.
 		valtype res = (_val * (valtype(1) << FRACTION_LENGTH)) / x._val;
 		_val = OFH::fromFixedPoint(res);
@@ -336,7 +336,7 @@ namespace Fi {
 		}
 
 		return ret;
-      
+
 	}
 
 	template<std::size_t W, std::size_t F, Signedness S,
@@ -380,7 +380,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	inline bool operator==(const Fixed<W, F, S, OF, R>& x, 
+	inline bool operator==(const Fixed<W, F, S, OF, R>& x,
 	                       const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -392,7 +392,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	inline bool operator!=(const Fixed<W, F, S, OF, R>& x, 
+	inline bool operator!=(const Fixed<W, F, S, OF, R>& x,
 	                       const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -404,7 +404,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	inline bool operator<(const Fixed<W, F, S, OF, R>& x, 
+	inline bool operator<(const Fixed<W, F, S, OF, R>& x,
 	                      const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -416,7 +416,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	inline bool operator<=(const Fixed<W, F, S, OF, R>& x, 
+	inline bool operator<=(const Fixed<W, F, S, OF, R>& x,
 	                       const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -428,7 +428,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	inline bool operator>(const Fixed<W, F, S, OF, R>& x, 
+	inline bool operator>(const Fixed<W, F, S, OF, R>& x,
 	                      const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -441,7 +441,7 @@ namespace Fi {
 	         template <typename> class OF,
 	         template <typename> class R>
 
-	inline bool operator>=(const Fixed<W, F, S, OF, R>& x, 
+	inline bool operator>=(const Fixed<W, F, S, OF, R>& x,
 	                       const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -455,8 +455,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator+(const Fixed<W, F, S, OF, R>& x, 
+	const Fixed<W, F, S, OF, R>
+	operator+(const Fixed<W, F, S, OF, R>& x,
 	          const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -470,8 +470,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator-(const Fixed<W, F, S, OF, R>& x, 
+	const Fixed<W, F, S, OF, R>
+	operator-(const Fixed<W, F, S, OF, R>& x,
 	          const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -485,8 +485,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator-(const Fixed<W, F, S, OF, R>& a) 
+	const Fixed<W, F, S, OF, R>
+	operator-(const Fixed<W, F, S, OF, R>& a)
 	{
 		//TODO #60: figure out what to do for unsigned types...
 		return Fixed<W, F, S, OF, R>(0.0) - a;
@@ -496,8 +496,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator*(const Fixed<W, F, S, OF, R>& x, 
+	const Fixed<W, F, S, OF, R>
+	operator*(const Fixed<W, F, S, OF, R>& x,
 	          const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -508,11 +508,11 @@ namespace Fi {
 	}
 
 
-	template<Signedness S, std::size_t W, std::size_t F, 
+	template<Signedness S, std::size_t W, std::size_t F,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator/(const Fixed<W, F, S, OF, R>& x, 
+	const Fixed<W, F, S, OF, R>
+	operator/(const Fixed<W, F, S, OF, R>& x,
 	          const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -527,9 +527,9 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator~(const Fixed<W, F, S, OF, R>& x) 
-	{ 
+	const Fixed<W, F, S, OF, R>
+	operator~(const Fixed<W, F, S, OF, R>& x)
+	{
 
 		return ~x;
 
@@ -538,8 +538,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator|(const Fixed<W, F, S, OF, R>& x, 
+	const Fixed<W, F, S, OF, R>
+	operator|(const Fixed<W, F, S, OF, R>& x,
 	          const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -552,8 +552,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator&(const Fixed<W, F, S, OF, R>& x, 
+	const Fixed<W, F, S, OF, R>
+	operator&(const Fixed<W, F, S, OF, R>& x,
 	          const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -566,8 +566,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
-	operator^(const Fixed<W, F, S, OF, R>& x, 
+	const Fixed<W, F, S, OF, R>
+	operator^(const Fixed<W, F, S, OF, R>& x,
 	          const Fixed<W, F, S, OF, R>& y)
 	{
 
@@ -580,7 +580,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fixed<W, F, S, OF, R> 
+	const Fixed<W, F, S, OF, R>
 	operator<<(const Fixed<W, F, S, OF, R>& x, std::size_t pos)
 	{
 
@@ -594,7 +594,7 @@ namespace Fi {
 	         template <typename> class OF,
 	         template <typename> class R>
 	const Fixed<W, F, S, OF, R> operator>>(const Fixed<W, F, S, OF, R>& x,
-	                                           std::size_t pos)
+	                                       std::size_t pos)
 	{
 
 		Fixed<W, F, S, OF, R> ret(x);
@@ -606,8 +606,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	std::ostream& 
-	operator<<(std::ostream& os, const Fixed<W, F, S, OF, R>& x) 
+	std::ostream&
+	operator<<(std::ostream& os, const Fixed<W, F, S, OF, R>& x)
 	{
 		os << x.toString();
 		return os;

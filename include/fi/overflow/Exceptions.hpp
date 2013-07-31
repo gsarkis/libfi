@@ -27,35 +27,35 @@
 
 namespace Fi {
 
-  /**
-   *\brief An exception thrown when positive overflow occurs.
-   */
-  class PositiveOverflow : public std::overflow_error {
-  public:
+	/**
+	 *\brief An exception thrown when positive overflow occurs.
+	 */
+	class PositiveOverflow : public std::overflow_error {
+	public:
 
-    /*
-     *\brief Constructor accepting a string message.
-     *\param what_arg Message stored in the exception object and used
-     *to generate the C-string return by the what() function.
-     */
-    explicit PositiveOverflow (const std::string& what_arg);
+		/*
+		 *\brief Constructor accepting a string message.
+		 *\param what_arg Message stored in the exception object and used
+		 *to generate the C-string return by the what() function.
+		 */
+		explicit PositiveOverflow (const std::string& what_arg);
 
-  };
+	};
 
-  /**
-   *\brief An exception thrown when negative overflow occurs.
-   */
-  class NegativeOverflow : public std::overflow_error {
-  public:
+	/**
+	 *\brief An exception thrown when negative overflow occurs.
+	 */
+	class NegativeOverflow : public std::overflow_error {
+	public:
 
-    /*
-     *\brief Constructor accepting a string message.
-     *\param what_arg Message stored in the exception object and used
-     *to generate the C-string return by the what() function.
-     */
-    explicit NegativeOverflow (const std::string& what_arg);
+		/*
+		 *\brief Constructor accepting a string message.
+		 *\param what_arg Message stored in the exception object and used
+		 *to generate the C-string return by the what() function.
+		 */
+		explicit NegativeOverflow (const std::string& what_arg);
 
-  };
+	};
 
 }
 

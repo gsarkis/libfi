@@ -30,142 +30,142 @@
 #include <sstream>
 
 namespace Fi {
-  /**\internal
-   *\brief Numerically compare strings.
-   */
-  namespace StringMath {
+	/**\internal
+	 *\brief Numerically compare strings.
+	 */
+	namespace StringMath {
 
-    /**\internal
-     *\brief Numerically check if a string is less than another (lhs < rhs).
-     *\param lhs Left hand side operand
-     *\param rhs Right hand side operand
-     *\throw std::invalid_argument if an operand is invalid.
-     */
-    bool less(const std::string& lhs, const std::string& rhs);
+		/**\internal
+		 *\brief Numerically check if a string is less than another (lhs < rhs).
+		 *\param lhs Left hand side operand
+		 *\param rhs Right hand side operand
+		 *\throw std::invalid_argument if an operand is invalid.
+		 */
+		bool less(const std::string& lhs, const std::string& rhs);
 
-    /**\internal
-     *\brief Numerically check if a string is greater than another (lhs > rhs).
-     *\param lhs Left hand side operand
-     *\param rhs Right hand side operand
-     *\throw std::invalid_argument if an operand is invalid.
-     */
-    bool greater(const std::string& lhs, const std::string& rhs);
+		/**\internal
+		 *\brief Numerically check if a string is greater than another (lhs > rhs).
+		 *\param lhs Left hand side operand
+		 *\param rhs Right hand side operand
+		 *\throw std::invalid_argument if an operand is invalid.
+		 */
+		bool greater(const std::string& lhs, const std::string& rhs);
 
-    /**\internal
-     *\brief Numerically check if a string is equal to another (lhs == rhs).
-     *\param lhs Left hand side operand
-     *\param rhs Right hand side operand
-     *\throw std::invalid_argument if an operand is invalid.
-     */
-    bool equal(const std::string& lhs, const std::string& rhs);
+		/**\internal
+		 *\brief Numerically check if a string is equal to another (lhs == rhs).
+		 *\param lhs Left hand side operand
+		 *\param rhs Right hand side operand
+		 *\throw std::invalid_argument if an operand is invalid.
+		 */
+		bool equal(const std::string& lhs, const std::string& rhs);
 
-    /**\internal
-     *\brief Increment an integer represented by a string.
-     *\param number Integer to increment.
-     *\return Incremented value.
-     */
-    std::string plusOne(const std::string& number);
+		/**\internal
+		 *\brief Increment an integer represented by a string.
+		 *\param number Integer to increment.
+		 *\return Incremented value.
+		 */
+		std::string plusOne(const std::string& number);
 
-  }
+	}
 
-  inline bool StringMath::
-  less(const std::string& lhs, const std::string& rhs) {
+	inline bool StringMath::
+	less(const std::string& lhs, const std::string& rhs) {
 
-    int signL = 0;
-    int signR = 0;
-    std::string intL, intR;
-    std::string fracL, fracR;
-    parseNumber(lhs, Fi::SIGNED, signL, intL, fracL);
-    parseNumber(rhs, Fi::SIGNED, signR, intR, fracR);
+		int signL = 0;
+		int signR = 0;
+		std::string intL, intR;
+		std::string fracL, fracR;
+		parseNumber(lhs, Fi::SIGNED, signL, intL, fracL);
+		parseNumber(rhs, Fi::SIGNED, signR, intR, fracR);
 
-    if ((intL == "0") && (fracL == "0")) signL = 1;
-    if ((intR == "0") && (fracR == "0")) signR = 1;
+		if ((intL == "0") && (fracL == "0")) signL = 1;
+		if ((intR == "0") && (fracR == "0")) signR = 1;
 
-    while (fracL.length() < fracR.length()) fracL.push_back('0');
-    while (fracL.length() > fracR.length()) fracR.push_back('0');
+		while (fracL.length() < fracR.length()) fracL.push_back('0');
+		while (fracL.length() > fracR.length()) fracR.push_back('0');
 
-    bool ret = false;
+		bool ret = false;
 
-    if (signL < signR) {
-      ret = true;
-    }
-    else if (signL > signR) {
-      ret = false;
-    }
-    //Same sign
-    else if (intL.length() < intR.length()) {
-      //flip result when comparing negative numbers
-      ret = true ^ (signL == -1);
-    }
-    else if (intL.length() > intR.length()) {
-      ret = false ^ (signL == -1);
-    }
-    //Same sign and integer length
-    else if (intL < intR) {
-      ret = true ^ (signL == -1);
-    }
-    else if (intL > intR) {
-      ret = false ^ (signL == -1);
-    }
-    //same sign and integer part
-    else if (fracL < fracR) {
-      ret = true ^ (signL == -1);
-    }
-    else if (fracL > fracR) {
-      ret = false ^ (signL == -1);
-    }
-
-
-    return ret;
-
-  }
-
-  inline bool StringMath::
-  greater(const std::string& lhs, const std::string& rhs) {
-
-    return !(less(lhs, rhs) || equal(lhs, rhs));
-
-  }
-
-  inline bool StringMath::
-  equal(const std::string& lhs, const std::string& rhs) {
-
-    int signL = 0;
-    int signR = 0;
-    std::string intL, intR;
-    std::string fracL, fracR;
-
-    parseNumber(lhs, Fi::SIGNED, signL, intL, fracL);
-    parseNumber(rhs, Fi::SIGNED, signR, intR, fracR);
-
-    if ((intL == "0") && (fracL == "0")) signL = 1;
-    if ((intR == "0") && (fracR == "0")) signR = 1;
-
-    return (signL == signR)
-      && (intL == intR)
-      && (fracL == fracR);
-
-  }
+		if (signL < signR) {
+			ret = true;
+		}
+		else if (signL > signR) {
+			ret = false;
+		}
+		//Same sign
+		else if (intL.length() < intR.length()) {
+			//flip result when comparing negative numbers
+			ret = true ^ (signL == -1);
+		}
+		else if (intL.length() > intR.length()) {
+			ret = false ^ (signL == -1);
+		}
+		//Same sign and integer length
+		else if (intL < intR) {
+			ret = true ^ (signL == -1);
+		}
+		else if (intL > intR) {
+			ret = false ^ (signL == -1);
+		}
+		//same sign and integer part
+		else if (fracL < fracR) {
+			ret = true ^ (signL == -1);
+		}
+		else if (fracL > fracR) {
+			ret = false ^ (signL == -1);
+		}
 
 
-  inline std::string StringMath::
-  plusOne(const std::string& number) {
+		return ret;
 
-    std::stringstream stream;
-    int64_t integer;
+	}
 
-    stream << number;
-    stream >> integer;
+	inline bool StringMath::
+	greater(const std::string& lhs, const std::string& rhs) {
 
-    ++integer;
+		return !(less(lhs, rhs) || equal(lhs, rhs));
 
-    stream.str("");
-    stream.clear();
-    stream << integer;
+	}
 
-    return stream.str();
+	inline bool StringMath::
+	equal(const std::string& lhs, const std::string& rhs) {
 
-  }
+		int signL = 0;
+		int signR = 0;
+		std::string intL, intR;
+		std::string fracL, fracR;
+
+		parseNumber(lhs, Fi::SIGNED, signL, intL, fracL);
+		parseNumber(rhs, Fi::SIGNED, signR, intR, fracR);
+
+		if ((intL == "0") && (fracL == "0")) signL = 1;
+		if ((intR == "0") && (fracR == "0")) signR = 1;
+
+		return (signL == signR)
+			&& (intL == intR)
+			&& (fracL == fracR);
+
+	}
+
+
+	inline std::string StringMath::
+	plusOne(const std::string& number) {
+
+		std::stringstream stream;
+		int64_t integer;
+
+		stream << number;
+		stream >> integer;
+
+		++integer;
+
+		stream.str("");
+		stream.clear();
+		stream << integer;
+
+		return stream.str();
+
+	}
 
 }
 

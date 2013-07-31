@@ -17,26 +17,26 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_ROUNDING_CLASSIC_HPP
 #define FI_ROUNDING_CLASSIC_HPP
 
 namespace Fi {
 
-  /**
-   *\ingroup rounding
-   *\brief Round towards nearest.
+	/**
+	 *\ingroup rounding
+	 *\brief Round towards nearest.
 
-   *If rounding occurs, the assigned value is rounded (up or down) 
-   *to the nearest value. Ties are rounded away from zero.
+	 *If rounding occurs, the assigned value is rounded (up or down) 
+	 *to the nearest value. Ties are rounded away from zero.
 
-   *\tparam T Fi::Traits of the fixed-point type.
+	 *\tparam T Fi::Traits of the fixed-point type.
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Classic;
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Classic;
 
 }
 

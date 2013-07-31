@@ -16,7 +16,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #include "fi/Fixed.hpp"
 #include "fi/overflow/Throw.hpp"
@@ -34,36 +34,36 @@ BOOST_AUTO_TEST_SUITE( negation_unsigned )
 BOOST_AUTO_TEST_CASE( unsigned_8_4_detection )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Throw> fi84t;
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Throw> fi84t;
 
-  CHECK_EQ( (-fi84t("0.0")), "0.0");
-  BOOST_CHECK_THROW( (-fi84t("1.0")), Fi::NegativeOverflow );
-  BOOST_CHECK_THROW( (-fi84t("3.125")), Fi::NegativeOverflow );
-  BOOST_CHECK_THROW( (-fi84t("15.9375")), Fi::NegativeOverflow );
+	CHECK_EQ( (-fi84t("0.0")), "0.0");
+	BOOST_CHECK_THROW( (-fi84t("1.0")), Fi::NegativeOverflow );
+	BOOST_CHECK_THROW( (-fi84t("3.125")), Fi::NegativeOverflow );
+	BOOST_CHECK_THROW( (-fi84t("15.9375")), Fi::NegativeOverflow );
 
 }
 
 BOOST_AUTO_TEST_CASE( unsigned_8_4_saturate )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Saturate> fi84s;
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Saturate> fi84s;
 
-  CHECK_EQ( (-fi84s("0.0")), "0.0");
-  CHECK_EQ( (-fi84s("1.0")), "0.0");
-  CHECK_EQ( (-fi84s("3.125")), "0.0");
-  CHECK_EQ( (-fi84s("15.9375")), "0.0");
+	CHECK_EQ( (-fi84s("0.0")), "0.0");
+	CHECK_EQ( (-fi84s("1.0")), "0.0");
+	CHECK_EQ( (-fi84s("3.125")), "0.0");
+	CHECK_EQ( (-fi84s("15.9375")), "0.0");
 
 }
 
 BOOST_AUTO_TEST_CASE( unsigned_8_4_wrap )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Wrap> fi84w;
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Wrap> fi84w;
 
-  CHECK_EQ( (-fi84w("0.0")), "0.0");
-  CHECK_EQ( (-fi84w("1.0")), "15.0");
-  CHECK_EQ( (-fi84w("3.125")), "12.875");
-  CHECK_EQ( (-fi84w("15.9375")), "0.0625");
+	CHECK_EQ( (-fi84w("0.0")), "0.0");
+	CHECK_EQ( (-fi84w("1.0")), "15.0");
+	CHECK_EQ( (-fi84w("3.125")), "12.875");
+	CHECK_EQ( (-fi84w("15.9375")), "0.0625");
 
 }
 
@@ -77,37 +77,37 @@ BOOST_AUTO_TEST_SUITE( negation_signed )
 BOOST_AUTO_TEST_CASE( signed_8_4_detection )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Throw> fi84t;
+	typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Throw> fi84t;
 
-  BOOST_CHECK_THROW( (-fi84t("-8.0")), Fi::PositiveOverflow);
-  CHECK_EQ( (-fi84t("-1.125")), "1.125");
-  CHECK_EQ( (-fi84t("0.0")), "0.0");
-  CHECK_EQ( (-fi84t("1.0")), "-1.0");
-  CHECK_EQ( (-fi84t("7.9375")), "-7.9375");
+	BOOST_CHECK_THROW( (-fi84t("-8.0")), Fi::PositiveOverflow);
+	CHECK_EQ( (-fi84t("-1.125")), "1.125");
+	CHECK_EQ( (-fi84t("0.0")), "0.0");
+	CHECK_EQ( (-fi84t("1.0")), "-1.0");
+	CHECK_EQ( (-fi84t("7.9375")), "-7.9375");
 }
 
 BOOST_AUTO_TEST_CASE( signed_8_4_saturation )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Saturate> fi84s;
+	typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Saturate> fi84s;
 
-  CHECK_EQ( (-fi84s("-8.0")), "7.9375");
-  CHECK_EQ( (-fi84s("-1.125")), "1.125");
-  CHECK_EQ( (-fi84s("0.0")), "0.0");
-  CHECK_EQ( (-fi84s("1.0")), "-1.0");
-  CHECK_EQ( (-fi84s("7.9375")), "-7.9375");
+	CHECK_EQ( (-fi84s("-8.0")), "7.9375");
+	CHECK_EQ( (-fi84s("-1.125")), "1.125");
+	CHECK_EQ( (-fi84s("0.0")), "0.0");
+	CHECK_EQ( (-fi84s("1.0")), "-1.0");
+	CHECK_EQ( (-fi84s("7.9375")), "-7.9375");
 }
 
 BOOST_AUTO_TEST_CASE( signed_8_4_wrap )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Wrap> fi84w;
+	typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Wrap> fi84w;
 
-  CHECK_EQ( (-fi84w("-8.0")), "-8.0");
-  CHECK_EQ( (-fi84w("-1.125")), "1.125");
-  CHECK_EQ( (-fi84w("0.0")), "0.0");
-  CHECK_EQ( (-fi84w("1.0")), "-1.0");
-  CHECK_EQ( (-fi84w("7.9375")), "-7.9375");
+	CHECK_EQ( (-fi84w("-8.0")), "-8.0");
+	CHECK_EQ( (-fi84w("-1.125")), "1.125");
+	CHECK_EQ( (-fi84w("0.0")), "0.0");
+	CHECK_EQ( (-fi84w("1.0")), "-1.0");
+	CHECK_EQ( (-fi84w("7.9375")), "-7.9375");
 }
 
 BOOST_AUTO_TEST_SUITE_END()
@@ -119,36 +119,36 @@ BOOST_AUTO_TEST_SUITE( negation_unsigned_eq )
 BOOST_AUTO_TEST_CASE( unsigned_4_4_detection )
 {
 
-  typedef Fi::Fixed<4, 4, Fi::UNSIGNED, Fi::Throw> fi4t;
+	typedef Fi::Fixed<4, 4, Fi::UNSIGNED, Fi::Throw> fi4t;
 
-  CHECK_EQ( (-fi4t("0.0")), "0.0");
-  BOOST_CHECK_THROW( (-fi4t("0.125")), Fi::NegativeOverflow );
-  BOOST_CHECK_THROW( (-fi4t("0.5")), Fi::NegativeOverflow );
-  BOOST_CHECK_THROW( (-fi4t("0.9375")), Fi::NegativeOverflow );
+	CHECK_EQ( (-fi4t("0.0")), "0.0");
+	BOOST_CHECK_THROW( (-fi4t("0.125")), Fi::NegativeOverflow );
+	BOOST_CHECK_THROW( (-fi4t("0.5")), Fi::NegativeOverflow );
+	BOOST_CHECK_THROW( (-fi4t("0.9375")), Fi::NegativeOverflow );
 
 }
 
 BOOST_AUTO_TEST_CASE( unsigned_4_4_saturate )
 {
 
-  typedef Fi::Fixed<4, 4, Fi::UNSIGNED, Fi::Saturate> fi4s;
+	typedef Fi::Fixed<4, 4, Fi::UNSIGNED, Fi::Saturate> fi4s;
 
-  CHECK_EQ( (-fi4s("0.0")), "0.0");
-  CHECK_EQ( (-fi4s("0.125")), "0.0");
-  CHECK_EQ( (-fi4s("0.5")), "0.0");
-  CHECK_EQ( (-fi4s("0.9375")), "0.0");
+	CHECK_EQ( (-fi4s("0.0")), "0.0");
+	CHECK_EQ( (-fi4s("0.125")), "0.0");
+	CHECK_EQ( (-fi4s("0.5")), "0.0");
+	CHECK_EQ( (-fi4s("0.9375")), "0.0");
 
 }
 
 BOOST_AUTO_TEST_CASE( unsigned_4_4_wrap )
 {
 
-  typedef Fi::Fixed<4, 4, Fi::UNSIGNED, Fi::Wrap> fi4w;
+	typedef Fi::Fixed<4, 4, Fi::UNSIGNED, Fi::Wrap> fi4w;
 
-  CHECK_EQ( (-fi4w("0.0")), "0.0");
-  CHECK_EQ( (-fi4w("0.125")), "0.875");
-  CHECK_EQ( (-fi4w("0.5")), "0.5");
-  CHECK_EQ( (-fi4w("0.9375")), "0.0625");
+	CHECK_EQ( (-fi4w("0.0")), "0.0");
+	CHECK_EQ( (-fi4w("0.125")), "0.875");
+	CHECK_EQ( (-fi4w("0.5")), "0.5");
+	CHECK_EQ( (-fi4w("0.9375")), "0.0625");
 
 }
 
@@ -162,38 +162,38 @@ BOOST_AUTO_TEST_SUITE( negation_signed_eq )
 BOOST_AUTO_TEST_CASE( signed_4_4_detection )
 {
 
-  typedef Fi::Fixed<4, 4, Fi::SIGNED, Fi::Throw> fi4t;
+	typedef Fi::Fixed<4, 4, Fi::SIGNED, Fi::Throw> fi4t;
 
-  BOOST_CHECK_THROW( (-fi4t("-0.5")), Fi::PositiveOverflow);
-  CHECK_EQ( (-fi4t("-0.125")), "0.125");
-  CHECK_EQ( (-fi4t("0.0")), "0.0");
-  CHECK_EQ( (-fi4t("0.125")), "-0.125");
-  CHECK_EQ( (-fi4t("0.4375")), "-0.4375");
+	BOOST_CHECK_THROW( (-fi4t("-0.5")), Fi::PositiveOverflow);
+	CHECK_EQ( (-fi4t("-0.125")), "0.125");
+	CHECK_EQ( (-fi4t("0.0")), "0.0");
+	CHECK_EQ( (-fi4t("0.125")), "-0.125");
+	CHECK_EQ( (-fi4t("0.4375")), "-0.4375");
 }
 
 BOOST_AUTO_TEST_CASE( signed_4_4_saturation )
 {
 
-  typedef Fi::Fixed<4, 4, Fi::SIGNED, Fi::Saturate> fi4s;
+	typedef Fi::Fixed<4, 4, Fi::SIGNED, Fi::Saturate> fi4s;
 
-  CHECK_EQ( (-fi4s("-0.5")), "0.4375");
-  CHECK_EQ( (-fi4s("-0.125")), "0.125");
-  CHECK_EQ( (-fi4s("0.0")), "0.0");
-  CHECK_EQ( (-fi4s("0.125")), "-0.125");
-  CHECK_EQ( (-fi4s("0.4375")), "-0.4375");
+	CHECK_EQ( (-fi4s("-0.5")), "0.4375");
+	CHECK_EQ( (-fi4s("-0.125")), "0.125");
+	CHECK_EQ( (-fi4s("0.0")), "0.0");
+	CHECK_EQ( (-fi4s("0.125")), "-0.125");
+	CHECK_EQ( (-fi4s("0.4375")), "-0.4375");
 
 }
 
 BOOST_AUTO_TEST_CASE( signed_4_4_wrap )
 {
 
-  typedef Fi::Fixed<4, 4, Fi::SIGNED, Fi::Wrap> fi4w;
+	typedef Fi::Fixed<4, 4, Fi::SIGNED, Fi::Wrap> fi4w;
 
-  CHECK_EQ( (-fi4w("-0.5")), "-0.5");
-  CHECK_EQ( (-fi4w("-0.125")), "0.125");
-  CHECK_EQ( (-fi4w("0.0")), "0.0");
-  CHECK_EQ( (-fi4w("0.125")), "-0.125");
-  CHECK_EQ( (-fi4w("0.4375")), "-0.4375");
+	CHECK_EQ( (-fi4w("-0.5")), "-0.5");
+	CHECK_EQ( (-fi4w("-0.125")), "0.125");
+	CHECK_EQ( (-fi4w("0.0")), "0.0");
+	CHECK_EQ( (-fi4w("0.125")), "-0.125");
+	CHECK_EQ( (-fi4w("0.4375")), "-0.4375");
 }
 
 BOOST_AUTO_TEST_SUITE_END()

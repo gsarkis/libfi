@@ -1,5 +1,5 @@
 /*
- * 
+ *
  *Copyright © 2012 Gabi Sarkis.
 
  *This file is part of the C++ Fixed-Point Library (LibFi).
@@ -17,7 +17,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #include "fi/Fixed.hpp"
 
@@ -29,64 +29,64 @@
 
 BOOST_AUTO_TEST_CASE( unsigned_min_val ) {
 
-  typedef Fi::Fixed<4, 4, Fi::UNSIGNED> fi4;
-  CHECK_EQ( (fi4::MinVal()), "0.0");
+	typedef Fi::Fixed<4, 4, Fi::UNSIGNED> fi4;
+	CHECK_EQ( (fi4::MinVal()), "0.0");
 
-  typedef Fi::Fixed<6, 3, Fi::UNSIGNED> fi63;
-  CHECK_EQ( (fi63::MinVal()), "0.0");
+	typedef Fi::Fixed<6, 3, Fi::UNSIGNED> fi63;
+	CHECK_EQ( (fi63::MinVal()), "0.0");
 
-  typedef Fi::Fixed<7, 3, Fi::UNSIGNED> fi73;
-  CHECK_EQ( (fi73::MinVal()), "0.0");
+	typedef Fi::Fixed<7, 3, Fi::UNSIGNED> fi73;
+	CHECK_EQ( (fi73::MinVal()), "0.0");
 
-  typedef Fi::Fixed<8, 4, Fi::UNSIGNED> fi84;
-  CHECK_EQ( (fi84::MinVal()), "0.0");
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED> fi84;
+	CHECK_EQ( (fi84::MinVal()), "0.0");
 
 }
 
 BOOST_AUTO_TEST_CASE( unsigned_max_val ) {
 
-  typedef Fi::Fixed<4, 4, Fi::UNSIGNED> fi4;
-  CHECK_EQ( (fi4::MaxVal()), "0.9375");
+	typedef Fi::Fixed<4, 4, Fi::UNSIGNED> fi4;
+	CHECK_EQ( (fi4::MaxVal()), "0.9375");
 
-  typedef Fi::Fixed<6, 3, Fi::UNSIGNED> fi63;
-  CHECK_EQ( (fi63::MaxVal()), "7.875");
+	typedef Fi::Fixed<6, 3, Fi::UNSIGNED> fi63;
+	CHECK_EQ( (fi63::MaxVal()), "7.875");
 
-  typedef Fi::Fixed<7, 3, Fi::UNSIGNED> fi73;
-  CHECK_EQ( (fi73::MaxVal()), "15.875");
+	typedef Fi::Fixed<7, 3, Fi::UNSIGNED> fi73;
+	CHECK_EQ( (fi73::MaxVal()), "15.875");
 
-  typedef Fi::Fixed<8, 4, Fi::UNSIGNED> fi84;
-  CHECK_EQ( (fi84::MaxVal()), "15.9375");
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED> fi84;
+	CHECK_EQ( (fi84::MaxVal()), "15.9375");
 
 }
 
 BOOST_AUTO_TEST_CASE( signed_min_val ) {
 
-  typedef Fi::Fixed<4, 4, Fi::SIGNED> fi4;
-  CHECK_EQ( (fi4::MinVal()), "-0.5");
+	typedef Fi::Fixed<4, 4, Fi::SIGNED> fi4;
+	CHECK_EQ( (fi4::MinVal()), "-0.5");
 
-  typedef Fi::Fixed<6, 3, Fi::SIGNED> fi63;
-  CHECK_EQ( (fi63::MinVal()), "-4.0");
+	typedef Fi::Fixed<6, 3, Fi::SIGNED> fi63;
+	CHECK_EQ( (fi63::MinVal()), "-4.0");
 
-  typedef Fi::Fixed<7, 3, Fi::SIGNED> fi73;
-  CHECK_EQ( (fi73::MinVal()), "-8.0");
+	typedef Fi::Fixed<7, 3, Fi::SIGNED> fi73;
+	CHECK_EQ( (fi73::MinVal()), "-8.0");
 
-  typedef Fi::Fixed<8, 4, Fi::SIGNED> fi84;
-  CHECK_EQ( (fi84::MinVal()), "-8.0");
+	typedef Fi::Fixed<8, 4, Fi::SIGNED> fi84;
+	CHECK_EQ( (fi84::MinVal()), "-8.0");
 
 }
 
 BOOST_AUTO_TEST_CASE( signed_max_val ) {
 
-  typedef Fi::Fixed<4, 4, Fi::SIGNED> fi4;
-  CHECK_EQ( (fi4::MaxVal()), "0.4375");
+	typedef Fi::Fixed<4, 4, Fi::SIGNED> fi4;
+	CHECK_EQ( (fi4::MaxVal()), "0.4375");
 
-  typedef Fi::Fixed<6, 3, Fi::SIGNED> fi63;
-  CHECK_EQ( (fi63::MaxVal()), "3.875");
+	typedef Fi::Fixed<6, 3, Fi::SIGNED> fi63;
+	CHECK_EQ( (fi63::MaxVal()), "3.875");
 
-  typedef Fi::Fixed<7, 3, Fi::SIGNED> fi73;
-  CHECK_EQ( (fi73::MaxVal()), "7.875");
+	typedef Fi::Fixed<7, 3, Fi::SIGNED> fi73;
+	CHECK_EQ( (fi73::MaxVal()), "7.875");
 
-  typedef Fi::Fixed<8, 4, Fi::SIGNED> fi84;
-  CHECK_EQ( (fi84::MaxVal()), "7.9375");
+	typedef Fi::Fixed<8, 4, Fi::SIGNED> fi84;
+	CHECK_EQ( (fi84::MaxVal()), "7.9375");
 
 }

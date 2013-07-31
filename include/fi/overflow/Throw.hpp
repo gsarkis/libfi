@@ -26,17 +26,17 @@
 #include "fi/overflow/Exceptions.hpp"
 
 namespace Fi {
-  /**
-   *\ingroup overflow
-   *\brief Throw an exception when overflow occurs.
+	/**
+	 *\ingroup overflow
+	 *\brief Throw an exception when overflow occurs.
 
-   *If positive overflow occurs, Fi::PositiveOverflow is thrown.
-   *If negative overflow occurs, Fi::NegativeOverflow is thrown.
+	 *If positive overflow occurs, Fi::PositiveOverflow is thrown.
+	 *If negative overflow occurs, Fi::NegativeOverflow is thrown.
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Throw;
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Throw;
 
 }
 

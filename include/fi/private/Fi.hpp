@@ -18,7 +18,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_PRIVATE_FI_HPP
 #define FI_PRIVATE_FI_HPP
@@ -32,24 +32,21 @@
  */
 namespace Fi {
 
-  /**\internal 
-     \brief The ability of the fixed-point type to store positive numbers
-     *only or both positive and negative numbers.
-     */
-  enum Signedness {
-    /**\internal
-     *A signed fixed-point number that can represent both positive
-     *and negative numbers.
-     */
-    SIGNED,
-    /**\internal
-     *An unsigned fixed-point number that can only represent positive
-     *numbers.
-     */
-    UNSIGNED};
-
-
-
+	/**\internal
+	   \brief The ability of the fixed-point type to store positive numbers
+	   *only or both positive and negative numbers.
+	   */
+	enum Signedness {
+		/**\internal
+		 *A signed fixed-point number that can represent both positive
+		 *and negative numbers.
+		 */
+		SIGNED,
+		/**\internal
+		 *An unsigned fixed-point number that can only represent positive
+		 *numbers.
+		 */
+		UNSIGNED};
 
 }
 

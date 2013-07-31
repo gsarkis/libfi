@@ -18,7 +18,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_PRIVATE_ARITHMETIC_HPP
 #define FI_PRIVATE_ARITHMETIC_HPP
@@ -27,16 +27,16 @@
 
 namespace Fi {
 
-  /**\internal
-   *\brief Determine whether a fixed-point number is positive or negative 
-   *regardless
-   *of the sign of the underlying type.
-   *\tparam TR Fi::Traits of the fixed-point type.
-   */
-  template<typename TR>
-  bool isNegative(const typename TR::valtype & val) {
-    return (((val & TR::S_MASK) >> (TR::WORD_LENGTH-1)) & 0x01) != 0;
-  }
+	/**\internal
+	 *\brief Determine whether a fixed-point number is positive or negative 
+	 *regardless
+	 *of the sign of the underlying type.
+	 *\tparam TR Fi::Traits of the fixed-point type.
+	 */
+	template<typename TR>
+	bool isNegative(const typename TR::valtype & val) {
+		return (((val & TR::S_MASK) >> (TR::WORD_LENGTH-1)) & 0x01) != 0;
+	}
 
 }
 

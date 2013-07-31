@@ -16,7 +16,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #include "fi/Fixed.hpp"
 #include "fi/overflow/Undefined.hpp"
@@ -35,43 +35,43 @@ BOOST_AUTO_TEST_SUITE( fix_unsigned )
 BOOST_AUTO_TEST_CASE( no_overflow_fl )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Undefined, Fi::Fix> fix;
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Undefined, Fi::Fix> fix;
 
-  CHECK_EQ( fix( 0.01), "0.0");
-  CHECK_EQ( fix( 0.5714),  "0.5625");
-  CHECK_EQ( fix(13.5861), "13.5625");
-  CHECK_EQ( fix(14.9439), "14.9375");
-  CHECK_EQ( fix(10.8598), "10.8125");
-  CHECK_EQ( fix(12.1238), "12.0625");
-  CHECK_EQ( fix(11.8901), "11.875" );
-  CHECK_EQ( fix( 6.2756),  "6.25"  );
-  CHECK_EQ( fix(10.4876), "10.4375");
-  CHECK_EQ( fix( 2.7390),  "2.6875");
-  CHECK_EQ( fix(11.2967), "11.25"  );
-  CHECK_EQ( fix(15.9375), "15.9375" );
-  CHECK_EQ( fix(15.9475), "15.9375" );
-  CHECK_EQ( fix(15.9999), "15.9375" );
+	CHECK_EQ( fix( 0.01), "0.0");
+	CHECK_EQ( fix( 0.5714),  "0.5625");
+	CHECK_EQ( fix(13.5861), "13.5625");
+	CHECK_EQ( fix(14.9439), "14.9375");
+	CHECK_EQ( fix(10.8598), "10.8125");
+	CHECK_EQ( fix(12.1238), "12.0625");
+	CHECK_EQ( fix(11.8901), "11.875" );
+	CHECK_EQ( fix( 6.2756),  "6.25"  );
+	CHECK_EQ( fix(10.4876), "10.4375");
+	CHECK_EQ( fix( 2.7390),  "2.6875");
+	CHECK_EQ( fix(11.2967), "11.25"  );
+	CHECK_EQ( fix(15.9375), "15.9375" );
+	CHECK_EQ( fix(15.9475), "15.9375" );
+	CHECK_EQ( fix(15.9999), "15.9375" );
 
 }
 
 BOOST_AUTO_TEST_CASE( no_overflow_string )
 {
 
-  typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Undefined, Fi::Fix> fix;
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED, Fi::Undefined, Fi::Fix> fix;
 
-  CHECK_EQ( fix( "0.5714"),  "0.5625");
-  CHECK_EQ( fix("13.5861"), "13.5625");
-  CHECK_EQ( fix("14.9439"), "14.9375");
-  CHECK_EQ( fix("10.8598"), "10.8125");
-  CHECK_EQ( fix("12.1238"), "12.0625");
-  CHECK_EQ( fix("11.8901"), "11.875" );
-  CHECK_EQ( fix( "6.2756"),  "6.25"  );
-  CHECK_EQ( fix("10.4876"), "10.4375");
-  CHECK_EQ( fix( "2.7390"),  "2.6875");
-  CHECK_EQ( fix("11.2967"), "11.25"  );
-  CHECK_EQ( fix("15.9375"), "15.9375" );
-  CHECK_EQ( fix("15.9475"), "15.9375" );
-  CHECK_EQ( fix("15.9999"), "15.9375" );
+	CHECK_EQ( fix( "0.5714"),  "0.5625");
+	CHECK_EQ( fix("13.5861"), "13.5625");
+	CHECK_EQ( fix("14.9439"), "14.9375");
+	CHECK_EQ( fix("10.8598"), "10.8125");
+	CHECK_EQ( fix("12.1238"), "12.0625");
+	CHECK_EQ( fix("11.8901"), "11.875" );
+	CHECK_EQ( fix( "6.2756"),  "6.25"  );
+	CHECK_EQ( fix("10.4876"), "10.4375");
+	CHECK_EQ( fix( "2.7390"),  "2.6875");
+	CHECK_EQ( fix("11.2967"), "11.25"  );
+	CHECK_EQ( fix("15.9375"), "15.9375" );
+	CHECK_EQ( fix("15.9475"), "15.9375" );
+	CHECK_EQ( fix("15.9999"), "15.9375" );
 
 }
 
@@ -83,51 +83,51 @@ BOOST_AUTO_TEST_SUITE( fix_unsigned )
 
 BOOST_AUTO_TEST_CASE( u_no_overflow_fl ) {
 
-  typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Undefined, Fi::Fix> fix;
+	typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Undefined, Fi::Fix> fix;
 
-  CHECK_EQ( fix(-8.0624), "-8.0");
-  CHECK_EQ( fix(-8.01), "-8.0");
-  CHECK_EQ( fix(-8.0), "-8.0");
+	CHECK_EQ( fix(-8.0624), "-8.0");
+	CHECK_EQ( fix(-8.01), "-8.0");
+	CHECK_EQ( fix(-8.0), "-8.0");
 
-  CHECK_EQ( fix(7.99), "7.9375");
-  CHECK_EQ( fix(7.95), "7.9375");
-  CHECK_EQ( fix(7.9375), "7.9375");
+	CHECK_EQ( fix(7.99), "7.9375");
+	CHECK_EQ( fix(7.95), "7.9375");
+	CHECK_EQ( fix(7.9375), "7.9375");
 
-  CHECK_EQ( fix(-7.4907), "-7.4375");
-  CHECK_EQ( fix(-3.5692), "-3.5625");
-  CHECK_EQ( fix(-7.2613), "-7.25");
-  CHECK_EQ( fix(-6.4459), "-6.4375");
-  CHECK_EQ( fix( 5.1753),  "5.125");
-  CHECK_EQ( fix( 3.1173),  "3.0625");
-  CHECK_EQ( fix(-2.9264), "-2.875");
-  CHECK_EQ( fix( 7.2036),  "7.1875");
-  CHECK_EQ( fix(-7.4489), "-7.4375");
-  CHECK_EQ( fix(-0.9801), "-0.9375");
+	CHECK_EQ( fix(-7.4907), "-7.4375");
+	CHECK_EQ( fix(-3.5692), "-3.5625");
+	CHECK_EQ( fix(-7.2613), "-7.25");
+	CHECK_EQ( fix(-6.4459), "-6.4375");
+	CHECK_EQ( fix( 5.1753),  "5.125");
+	CHECK_EQ( fix( 3.1173),  "3.0625");
+	CHECK_EQ( fix(-2.9264), "-2.875");
+	CHECK_EQ( fix( 7.2036),  "7.1875");
+	CHECK_EQ( fix(-7.4489), "-7.4375");
+	CHECK_EQ( fix(-0.9801), "-0.9375");
 
 }
 
 BOOST_AUTO_TEST_CASE( u_no_overflow_string ) {
 
-  typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Undefined, Fi::Fix> fix;
+	typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Undefined, Fi::Fix> fix;
 
-  CHECK_EQ( fix("-8.0624"), "-8.0");
-  CHECK_EQ( fix("-8.01"), "-8.0");
-  CHECK_EQ( fix("-8.0"), "-8.0");
+	CHECK_EQ( fix("-8.0624"), "-8.0");
+	CHECK_EQ( fix("-8.01"), "-8.0");
+	CHECK_EQ( fix("-8.0"), "-8.0");
 
-  CHECK_EQ( fix("7.99"), "7.9375");
-  CHECK_EQ( fix("7.95"), "7.9375");
-  CHECK_EQ( fix("7.9375"), "7.9375");
+	CHECK_EQ( fix("7.99"), "7.9375");
+	CHECK_EQ( fix("7.95"), "7.9375");
+	CHECK_EQ( fix("7.9375"), "7.9375");
 
-  CHECK_EQ( fix("-7.4907"), "-7.4375");
-  CHECK_EQ( fix("-3.5692"), "-3.5625");
-  CHECK_EQ( fix("-7.2613"), "-7.25");
-  CHECK_EQ( fix("-6.4459"), "-6.4375");
-  CHECK_EQ( fix( "5.1753"),  "5.125");
-  CHECK_EQ( fix( "3.1173"),  "3.0625");
-  CHECK_EQ( fix("-2.9264"), "-2.875");
-  CHECK_EQ( fix( "7.2036"),  "7.1875");
-  CHECK_EQ( fix("-7.4489"), "-7.4375");
-  CHECK_EQ( fix("-0.9801"), "-0.9375");
+	CHECK_EQ( fix("-7.4907"), "-7.4375");
+	CHECK_EQ( fix("-3.5692"), "-3.5625");
+	CHECK_EQ( fix("-7.2613"), "-7.25");
+	CHECK_EQ( fix("-6.4459"), "-6.4375");
+	CHECK_EQ( fix( "5.1753"),  "5.125");
+	CHECK_EQ( fix( "3.1173"),  "3.0625");
+	CHECK_EQ( fix("-2.9264"), "-2.875");
+	CHECK_EQ( fix( "7.2036"),  "7.1875");
+	CHECK_EQ( fix("-7.4489"), "-7.4375");
+	CHECK_EQ( fix("-0.9801"), "-0.9375");
 
 }
 

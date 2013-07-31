@@ -17,22 +17,22 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_OVERFLOW_WRAP_HPP
 #define FI_OVERFLOW_WRAP_HPP
 
 namespace Fi {
-  /**
-   *\ingroup overflow
-   *\brief A wrap-around (modulus) overflow handler.
+	/**
+	 *\ingroup overflow
+	 *\brief A wrap-around (modulus) overflow handler.
 
-   *If overflow occurs, the assigned value is the original value modulo 2^(W+1).
+	 *If overflow occurs, the assigned value is the original value modulo 2^(W+1).
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Wrap;
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Wrap;
 
 }
 

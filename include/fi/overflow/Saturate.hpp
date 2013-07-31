@@ -17,24 +17,24 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_OVERFLOW_SATURATE_HPP
 #define FI_OVERFLOW_SATURATE_HPP
 
 namespace Fi {
 
-  /**
-   *\ingroup overflow
-   *\brief A saturating overflow handler.
+	/**
+	 *\ingroup overflow
+	 *\brief A saturating overflow handler.
 
-   *If overflow occurs, the assigned value is set to nearest representable
-   *value.
+	 *If overflow occurs, the assigned value is set to nearest representable
+	 *value.
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Saturate;
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Saturate;
 
 }
 

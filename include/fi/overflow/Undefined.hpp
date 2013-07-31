@@ -23,18 +23,18 @@
 #define FI_OVERFLOW_UNDEFINED_HPP
 
 namespace Fi {
-  /**
-   *\ingroup overflow
-   *\brief Optimized for speed, the actual behavior depends on the 
-   *compiler and underlying system.
+	/**
+	 *\ingroup overflow
+	 *\brief Optimized for speed, the actual behavior depends on the 
+	 *compiler and underlying system.
 
-   *\warning The programmer is willing to accept undefined behavior 
-   *in the event of an overflow.
+	 *\warning The programmer is willing to accept undefined behavior 
+	 *in the event of an overflow.
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Undefined;
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Undefined;
 
 }
 

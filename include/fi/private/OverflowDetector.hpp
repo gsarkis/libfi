@@ -17,7 +17,7 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_PRIVATE_OVERFLOW_DETECTOR_HPP
 #define FI_PRIVATE_OVERFLOW_DETECTOR_HPP
@@ -32,172 +32,172 @@
 
 namespace Fi {
 
-  /**
-   *\internal
-   *\brief An overflow detector.
+	/**
+	 *\internal
+	 *\brief An overflow detector.
 
-   *Converts from different types to a Fixed number,
-   *detects overflow, and applies the handler \c OFH
+	 *Converts from different types to a Fixed number,
+	 *detects overflow, and applies the handler \c OFH
 
-   *\tparam T Traits of the fixed-point number.
-   *\tparam OFH Overflow handler.
-   */
-  template<typename T, template <typename> class OFH>
-  class OverflowDetector {
+	 *\tparam T Traits of the fixed-point number.
+	 *\tparam OFH Overflow handler.
+	 */
+	template<typename T, template <typename> class OFH>
+	class OverflowDetector {
 
-  public:
+	public:
 
-    /**
-     *\internal
-     *\brief Detect overflow in conversion from another fixed-point number.
-     *\param n Integer representing a fixed-point number.
-     *\return An integer representing the fixed-point number after
-     *overflow has been handled.
-     */
-    static typename T::valtype fromFixedPoint(const typename T::valtype& n);
+		/**
+		 *\internal
+		 *\brief Detect overflow in conversion from another fixed-point number.
+		 *\param n Integer representing a fixed-point number.
+		 *\return An integer representing the fixed-point number after
+		 *overflow has been handled.
+		 */
+		static typename T::valtype fromFixedPoint(const typename T::valtype& n);
 
-    /**
-     *\internal
-     *\brief Detect overflow in conversion from a floating-point number.
-     *\param f Source floating-point number.
-     *\param n Fixed-point result of conversion.
-     *\param maxRoundChange Maximum possible amount the number was 
-     *adjust by due to rounding.
-     *\return An integer representing the fixed-point number after
-     *overflow has been handled.
-     */
-    static typename T::valtype fromDouble(double f,
-                                          const typename T::valtype& n,
-                                          double maxRoundChange);
+		/**
+		 *\internal
+		 *\brief Detect overflow in conversion from a floating-point number.
+		 *\param f Source floating-point number.
+		 *\param n Fixed-point result of conversion.
+		 *\param maxRoundChange Maximum possible amount the number was
+		 *adjust by due to rounding.
+		 *\return An integer representing the fixed-point number after
+		 *overflow has been handled.
+		 */
+		static typename T::valtype fromDouble(double f,
+		                                      const typename T::valtype& n,
+		                                      double maxRoundChange);
 
-    /**
-     *\internal
-     *\brief Detect overflow in conversion from a string.
-     *\param str String representing a number. \c str must
-     *not be an empty string.
-     *\param n Fixed-point result of conversion.
-     *\param roundingDirection Whether the value of the number increased 
-     *(+1), decreased (-1), or did not change (0) as a result of rounding.
-     *\return An integer representing the fixed-point number after
-     *overflow has been handled.
-     */
-    static typename T::valtype fromString(const std::string& str,
-                                          const typename T::valtype& n,
-                                          int roundingDirection);
+		/**
+		 *\internal
+		 *\brief Detect overflow in conversion from a string.
+		 *\param str String representing a number. \c str must
+		 *not be an empty string.
+		 *\param n Fixed-point result of conversion.
+		 *\param roundingDirection Whether the value of the number increased
+		 *(+1), decreased (-1), or did not change (0) as a result of rounding.
+		 *\return An integer representing the fixed-point number after
+		 *overflow has been handled.
+		 */
+		static typename T::valtype fromString(const std::string& str,
+		                                      const typename T::valtype& n,
+		                                      int roundingDirection);
 
-  };
+	};
 
-  template<typename T,  template <typename> class OFH>
-  inline typename T::valtype OverflowDetector<T, OFH>::
-  fromFixedPoint(const typename T::valtype& n) {
+	template<typename T,  template <typename> class OFH>
+	inline typename T::valtype OverflowDetector<T, OFH>::
+	fromFixedPoint(const typename T::valtype& n) {
 
-    //Cannot use ternary operator due to n being const.
+		//Cannot use ternary operator due to n being const.
 
-    typename T::valtype ret(n);
+		typename T::valtype ret(n);
 
-    //Casting to signed to detect negative overflow as a result of
-    //subtracting two unsigned numbers.
-    if (static_cast<typename T::SignedType>(n) < T::MIN_VAL) {
-      ret = OFH<T>::negativeOverflow(n);
-    }
-    else if (static_cast<typename T::SignedType>(n) > T::MAX_VAL) {
-      ret = OFH<T>::positiveOverflow(n);
-    }
+		//Casting to signed to detect negative overflow as a result of
+		//subtracting two unsigned numbers.
+		if (static_cast<typename T::SignedType>(n) < T::MIN_VAL) {
+			ret = OFH<T>::negativeOverflow(n);
+		}
+		else if (static_cast<typename T::SignedType>(n) > T::MAX_VAL) {
+			ret = OFH<T>::positiveOverflow(n);
+		}
 
-    return ret;
+		return ret;
 
-  }
+	}
 
-  template<typename T, template <typename> class OFH>
-  inline typename T::valtype OverflowDetector<T, OFH>::
-  fromDouble(double f, const typename T::valtype& n, double maxRoundChange) {
+	template<typename T, template <typename> class OFH>
+	inline typename T::valtype OverflowDetector<T, OFH>::
+	fromDouble(double f, const typename T::valtype& n, double maxRoundChange) {
 
-    typename T::valtype ret = n;
-    double minimum = T::minDoubleValue();
-    double maximum = T::maxDoubleValue();
+		typename T::valtype ret = n;
+		double minimum = T::minDoubleValue();
+		double maximum = T::maxDoubleValue();
 
-    //Cannot simplify to (f <= (minimum - r)).
-    //Consider minimum = 0, r = -0.1 (rounding down), and f = 0.05.
-    if ((f < minimum) && ((minimum - f) >= maxRoundChange)) {
-      ret = OFH<T>::negativeOverflow(ret);
-    }
-    else if ((f > maximum) && ((f - maximum) >= -maxRoundChange)) {
-      ret = OFH<T>::positiveOverflow(ret);
-    }
+		//Cannot simplify to (f <= (minimum - r)).
+		//Consider minimum = 0, r = -0.1 (rounding down), and f = 0.05.
+		if ((f < minimum) && ((minimum - f) >= maxRoundChange)) {
+			ret = OFH<T>::negativeOverflow(ret);
+		}
+		else if ((f > maximum) && ((f - maximum) >= -maxRoundChange)) {
+			ret = OFH<T>::positiveOverflow(ret);
+		}
 
-    return ret;
+		return ret;
 
-  }
+	}
 
-  template<typename T, template <typename> class OFH>
-  inline typename T::valtype OverflowDetector<T, OFH>::
-  fromString(const std::string& fStr, const typename T::valtype& res,
-             int roundingDirection) {
+	template<typename T, template <typename> class OFH>
+	inline typename T::valtype OverflowDetector<T, OFH>::
+	fromString(const std::string& fStr, const typename T::valtype& res,
+	           int roundingDirection) {
 
-    typename T::valtype ret = res;
+		typename T::valtype ret = res;
 
-    std::string convRes = StringConversion::toString<T>(ret);
+		std::string convRes = StringConversion::toString<T>(ret);
 
-    bool negative = (fStr[0] == '-');
-    bool overflow = false;
+		bool negative = (fStr[0] == '-');
+		bool overflow = false;
 
-    if (negative && (convRes[0] != '-') && (convRes != "0.0")) {
-      overflow = true;
-    }
-    else if (!negative && (convRes[0] == '-') && (convRes != "0.0")) {
-      overflow = true;
-    }
-    else {
+		if (negative && (convRes[0] != '-') && (convRes != "0.0")) {
+			overflow = true;
+		}
+		else if (!negative && (convRes[0] == '-') && (convRes != "0.0")) {
+			overflow = true;
+		}
+		else {
 
-      std::string minimum = StringConversion::toString<T>(+T::MIN_VAL);
-      std::string maximum = StringConversion::toString<T>(+T::MAX_VAL);
+			std::string minimum = StringConversion::toString<T>(+T::MIN_VAL);
+			std::string maximum = StringConversion::toString<T>(+T::MAX_VAL);
 
-      if (StringMath::greater(fStr, maximum)) {
+			if (StringMath::greater(fStr, maximum)) {
 
-        overflow = true;
+				overflow = true;
 
-        if (roundingDirection == -1) {
-          std::string integer;
-          std::string fractional;
-          typename T::valtype sign;
-          parseNumber(maximum, T::SIGNEDNESS, sign, integer, fractional);
-          std::string limit = StringMath::plusOne(integer) + ".0";
-          if (StringMath::less(fStr, limit)) {
-            overflow = false;
-          }
-        }
+				if (roundingDirection == -1) {
+					std::string integer;
+					std::string fractional;
+					typename T::valtype sign;
+					parseNumber(maximum, T::SIGNEDNESS, sign, integer, fractional);
+					std::string limit = StringMath::plusOne(integer) + ".0";
+					if (StringMath::less(fStr, limit)) {
+						overflow = false;
+					}
+				}
 
-      }
-      else if (StringMath::less(fStr, minimum)) {
+			}
+			else if (StringMath::less(fStr, minimum)) {
 
-        overflow = true;
+				overflow = true;
 
-        if (roundingDirection == 1) {
-          std::string integer;
-          std::string fractional;
-          typename T::valtype sign;
-          parseNumber(minimum, T::SIGNEDNESS, sign, integer, fractional);
-          std::string limit = "-" + integer + "."
-            + StringConversion::unsignedFractionalString<T>(typename T::valtype(1));
-          if (StringMath::greater(fStr, limit)) {
-            overflow = false;
-          }
-        }
+				if (roundingDirection == 1) {
+					std::string integer;
+					std::string fractional;
+					typename T::valtype sign;
+					parseNumber(minimum, T::SIGNEDNESS, sign, integer, fractional);
+					std::string limit = "-" + integer + "."
+						+ StringConversion::unsignedFractionalString<T>(typename T::valtype(1));
+					if (StringMath::greater(fStr, limit)) {
+						overflow = false;
+					}
+				}
 
-      }
+			}
 
-    }
+		}
 
-    if (overflow && negative) {
-      ret = OFH<T>::negativeOverflow(ret);
-    }
-    else if (overflow && !negative) {
-      ret = OFH<T>::positiveOverflow(ret);
-    }
+		if (overflow && negative) {
+			ret = OFH<T>::negativeOverflow(ret);
+		}
+		else if (overflow && !negative) {
+			ret = OFH<T>::positiveOverflow(ret);
+		}
 
-    return ret;
+		return ret;
 
-  }
+	}
 
 }
 #endif

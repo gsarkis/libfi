@@ -17,25 +17,25 @@
  *You should have received a copy of the GNU General Public License
  *along with LibFi.  If not, see <http://www.gnu.org/licenses/>.
 
-*/
+ */
 
 #ifndef FI_ROUNDING_CEIL_HPP
 #define FI_ROUNDING_CEIL_HPP
 
 namespace Fi {
-  /**
-   *\ingroup rounding
-   *\brief Round towards positive infinity.
+	/**
+	 *\ingroup rounding
+	 *\brief Round towards positive infinity.
 
-   *A value is rounded towards positive infinity. Also known as ceil
-   *or positive.
+	 *A value is rounded towards positive infinity. Also known as ceil
+	 *or positive.
 
-   *Always assumes that T::FRACTION_LENGTH bits will be rounded away.
+	 *Always assumes that T::FRACTION_LENGTH bits will be rounded away.
 
-   *\tparam T Fi::Traits of the fixed-point type.
-   */
-  template <typename T>
-  struct Ceil;
+	 *\tparam T Fi::Traits of the fixed-point type.
+	 */
+	template <typename T>
+	struct Ceil;
 
 }
 
