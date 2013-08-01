@@ -32,7 +32,7 @@ LibFi is documented using Doxygen. To build the documentation, you need [Doxygen
 ### Quick Reference
 The `Fi::Fixed<TOTAL_WIDTH, FRAC_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatype accepts five parameters: 
 
-| Type | Description |
+| Parameter | Description |
 |:------------|:------------|
 | `TOTAL_WIDTH` | Total number of bits in binary representation. |
 | `FRAC_WIDTH`  | Number of fractional bits. |
@@ -42,7 +42,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRAC_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatyp
 
 #### Overflow
 
-| Type | Description |
+| Mode | Description |
 |:------------|:------------|
 | `Fi::Classic` | Round to nearest representable value. Ties are rounded away from zero. |
 | `Fi::Ceil`    | Round to nearest representable value towards positive infinity. |
@@ -51,7 +51,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRAC_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatyp
 
 #### Rounding
 
-| Type | Description |
+| Mode | Description |
 |:------------|:------------|
 | `Fi::Saturate`  | Saturate value to maximum value allowed by selected quantization parameters. |
 | `Fi::Throw`     | Throw a `Fi::PositiveOverflow` or a `Fi::NegativeOverflow` exception, depending on the direction of the overflow. |
