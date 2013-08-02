@@ -58,6 +58,8 @@ The `Fi::Fixed<TOTAL_WIDTH, FRAC_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatyp
 | `Fi::Undefined` | Use undefined overflow behavior to minimize overhead when numbers can't overflow. |
 | `Fi::Wrap`      | If overflow occurs, the value is `value % 2^(TOTAL_WIDTH+1)`. |
  
+## Tests
+Nightly test build results are available [on the following page](http://my.cdash.org/index.php?project=LibFi).
 
 ## External References
 * [MATLAB Fixed-Point Designer Toolbox](http://www.mathworks.com/help/fixedpoint/ref/_f46184.html)
