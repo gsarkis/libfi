@@ -3,7 +3,5 @@ a.out
 .*swp
 cscope.*
 \#*\#
-tests/*_test
-samples/*_sample
 doc/
 build/
