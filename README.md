@@ -44,10 +44,11 @@ The `Fi::Fixed<TOTAL_WIDTH, FRAC_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatyp
 
 | Mode | Description |
 |:------------|:------------|
-| `Fi::Classic` | Round to nearest representable value. Ties are rounded away from zero. |
-| `Fi::Ceil`    | Round to nearest representable value towards positive infinity. |
-| `Fi::Floor`   | Round to nearest representable value towards negative infinity. |
-| `Fi::Fix`     | Round to nearest representable value towards zero. |
+| `Fi::Classic`  | Round to nearest representable value. Ties are rounded away from zero. |
+| `Fi::Ceil`     | Round to nearest representable value towards positive infinity. |
+| `Fi::Floor`    | Round to nearest representable value towards negative infinity. |
+| `Fi::Fix`      | Round to nearest representable value towards zero. |
+| `Fi::NearEven` | Round to nearest representable value. Ties are rounded towards a lsb of 0. |
 
 #### Rounding
 
