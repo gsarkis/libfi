@@ -50,6 +50,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 | `Fi::Floor`   | Round towards negative infinity. |
 | `Fi::Fix`     | Round towards zero. |
 | `Fi::NearEven` | Round to nearest representable value. Ties are rounded towards an LSB of 0. |
+| `Fi::NearOdd`  | Round to nearest representable value. Ties are rounded towards an LSB of 1. |
 
 #### Overflow
 
