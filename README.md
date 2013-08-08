@@ -33,13 +33,13 @@ LibFi is documented using Doxygen. To build the documentation, you need [Doxygen
 ### Quick Reference
 The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatype accepts five parameters: 
 
-| Parameter | Description |
-|:------------|:------------|
-| `TOTAL_WIDTH` | Total number of bits in binary representation, including the sign for signed types. |
-| `FRACTION_WIDTH`  | Number of fractional bits. |
-| `SIGNEDNESS`  | `Fi::SIGNED` for signed values; `Fi::UNSIGNED` for unsigned values. |
-| `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. |
-| `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. |
+| Parameter | Description | Required |
+|:------------|:------------|:------------|
+| `TOTAL_WIDTH` | Total number of bits in binary representation, including the sign for signed types. | Mandatory |
+| `FRACTION_WIDTH`  | Number of fractional bits. | Mandatory |
+| `SIGNEDNESS`  | `Fi::SIGNED` for signed values; `Fi::UNSIGNED` for unsigned values. | Mandatory |
+| `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. | Optional |
+| `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. | Optional|
 
 #### Overflow
 
@@ -48,7 +48,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 | `Fi::Classic` | Round to nearest representable value. Ties are rounded away from zero. |
 | `Fi::Ceil`    | Round towards positive infinity. |
 | `Fi::Floor`   | Round towards negative infinity. |
-| `Fi::Fix`     | Round towards zero. |
+| `Fi::Fix`     | Round towards zero. **Default value**. |
 
 #### Rounding
 
@@ -56,7 +56,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 |:------------|:------------|
 | `Fi::Saturate`  | Saturate value to maximum or minimum value allowed by selected quantization parameters. |
 | `Fi::Wrap`      | Wrap the value around when overflow occurs. |
-| `Fi::Throw`     | When overflow occurs, throw a `Fi::PositiveOverflow` or a `Fi::NegativeOverflow` exception, depending on the direction of the overflow. |
+| `Fi::Throw`     | When overflow occurs, throw a `Fi::PositiveOverflow` or a `Fi::NegativeOverflow` exception, depending on the direction of the overflow. **Default value**. |
 | `Fi::Undefined` | The behavior of overflow is undefined. Use when execution speed is more important than results. |
  
 ## Tests
