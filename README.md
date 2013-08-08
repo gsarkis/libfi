@@ -11,6 +11,7 @@ This is a header-only library so you include `./fi/Fixed.hpp`, and any applicabl
 Here is an example of multiplying 8-bit signed fixed-point numbers with 4 fractional bits and wrap-around overflow handling:
 ```cpp
 #include "fi/Fixed.hpp"
+#include "fi/overflow/Wrap.hpp"
 
 #include <iostream>
 
