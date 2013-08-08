@@ -62,6 +62,13 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 ## Tests
 Nightly test build results are available [on the following page](http://my.cdash.org/index.php?project=LibFi).
 
+### Supported Platforms
+Tests are run on the following platforms:
+* 64-bit Linux using GCC.
+* 64-bit Linux using Clang.
+
+The master branch always contains code which passes all the tests on the supported platforms.
+
 ## External References
 * [MATLAB Fixed-Point Designer Toolbox](http://www.mathworks.com/help/fixedpoint/ref/_f46184.html)
 * [C++ Binary Fixed-Point Arithmetic Library Proposal](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3352.html)
