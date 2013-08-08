@@ -33,6 +33,14 @@
 	Fi::AssertionFailure<sizeof(Fi::W_Must_Be_Less_than_33<(x) == 0 ? false : true>)> \
 	FI_CONC2(AssertionValtype, __LINE__)
 
+#define FI_STATIC_ASSERT_W_0(x) typename	  \
+	Fi::AssertionFailure<sizeof(Fi::W_Must_Be_Greater_than_0<(x) == 0 ? false : true>)> \
+	FI_CONC2(AssertionValtype, __LINE__)
+
+#define FI_STATIC_ASSERT_F_0(x) typename	  \
+	Fi::AssertionFailure<sizeof(Fi::F_Must_Be_Greater_than_0<(x) == 0 ? false : true>)> \
+	FI_CONC2(AssertionValtype, __LINE__)
+
 namespace Fi {
 
 	template<bool B> struct W_Must_Be_Greater_than_or_Equal_to_F;
@@ -44,6 +52,18 @@ namespace Fi {
 	template<bool B> struct W_Must_Be_Less_than_33;
 
 	template<> struct W_Must_Be_Less_than_33<true> {
+		static const int val = 1;
+	};
+
+	template<bool B> struct W_Must_Be_Greater_than_0;
+
+	template<> struct W_Must_Be_Greater_than_0<true> {
+		static const int val = 1;
+	};
+
+	template<bool B> struct F_Must_Be_Greater_than_0;
+
+	template<> struct F_Must_Be_Greater_than_0<true> {
 		static const int val = 1;
 	};
 
