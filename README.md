@@ -31,12 +31,12 @@ int main(int argc, char* argv[]) {
 LibFi is documented using Doxygen. To build the documentation, you need [Doxygen](http://www.doxygen.org). In the library's root directory, run `doxygen`. The documentation will be available in `doc/html/index.html`.
 
 ### Quick Reference
-The `Fi::Fixed<TOTAL_WIDTH, FRAC_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatype accepts five parameters: 
+The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatype accepts five parameters: 
 
 | Parameter | Description |
 |:------------|:------------|
-| `TOTAL_WIDTH` | Total number of bits in binary representation. |
-| `FRAC_WIDTH`  | Number of fractional bits. |
+| `TOTAL_WIDTH` | Total number of bits in binary representation, including the sign for signed types. |
+| `FRACTION_WIDTH`  | Number of fractional bits. |
 | `SIGNEDNESS`  | `Fi::SIGNED` for signed values; `Fi::UNSIGNED` for unsigned values. |
 | `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. |
 | `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. |
@@ -46,18 +46,18 @@ The `Fi::Fixed<TOTAL_WIDTH, FRAC_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatyp
 | Mode | Description |
 |:------------|:------------|
 | `Fi::Classic` | Round to nearest representable value. Ties are rounded away from zero. |
-| `Fi::Ceil`    | Round to nearest representable value towards positive infinity. |
-| `Fi::Floor`   | Round to nearest representable value towards negative infinity. |
-| `Fi::Fix`     | Round to nearest representable value towards zero. |
+| `Fi::Ceil`    | Round towards positive infinity. |
+| `Fi::Floor`   | Round towards negative infinity. |
+| `Fi::Fix`     | Round towards zero. |
 
 #### Rounding
 
 | Mode | Description |
 |:------------|:------------|
-| `Fi::Saturate`  | Saturate value to maximum value allowed by selected quantization parameters. |
-| `Fi::Throw`     | Throw a `Fi::PositiveOverflow` or a `Fi::NegativeOverflow` exception, depending on the direction of the overflow. |
-| `Fi::Undefined` | Use undefined overflow behavior to minimize overhead when numbers can't overflow. |
-| `Fi::Wrap`      | If overflow occurs, the value is `value % 2^(TOTAL_WIDTH+1)`. |
+| `Fi::Saturate`  | Saturate value to maximum or minimum value allowed by selected quantization parameters. |
+| `Fi::Wrap`      | Wrap the value around when overflow occurs. |
+| `Fi::Throw`     | When overflow occurs, throw a `Fi::PositiveOverflow` or a `Fi::NegativeOverflow` exception, depending on the direction of the overflow. |
+| `Fi::Undefined` | The behavior of overflow is undefined. Use when execution speed is more important than results. |
  
 ## Tests
 Nightly test build results are available [on the following page](http://my.cdash.org/index.php?project=LibFi).
