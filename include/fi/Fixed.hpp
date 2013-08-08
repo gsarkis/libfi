@@ -114,6 +114,8 @@ namespace Fi {
 	class Fixed {
 
 		//will be replaced with C++11 static_assert
+		FI_STATIC_ASSERT_W_0(W > 0);
+		FI_STATIC_ASSERT_F_0(F > 0);
 		FI_STATIC_ASSERT_W_33(W <= 32);
 		FI_STATIC_ASSERT_W_F(W >= F);
 
