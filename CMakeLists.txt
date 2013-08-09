@@ -18,3 +18,4 @@ include_directories(${PROJECT_SOURCE_DIR}/include/)
 set(CMAKE_CXX_FLAGS "-Wall -pedantic -Wextra")
 
 add_subdirectory (tests) 
+add_subdirectory (examples) 
