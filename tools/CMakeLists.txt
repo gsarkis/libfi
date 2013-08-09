@@ -1,0 +1,2 @@
+add_executable(fixed ${PROJECT_SOURCE_DIR}/tools/fixed.cpp)
+target_link_libraries(fixed ${Boost_LIBRARIES})
