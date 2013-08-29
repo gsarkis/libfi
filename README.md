@@ -35,11 +35,11 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 
 | Parameter | Description | Required |
 |:------------|:------------|:------------|
-| `TOTAL_WIDTH` | Total number of bits in binary representation, including the sign for signed types. | Mandatory |
-| `FRACTION_WIDTH`  | Number of fractional bits. | Mandatory |
-| `SIGNEDNESS`  | `Fi::SIGNED` for signed values; `Fi::UNSIGNED` for unsigned values. | Mandatory |
-| `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. | Optional |
-| `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. | Optional|
+| `TOTAL_WIDTH` | Total number of bits in binary representation, including the sign for signed types. | Yes |
+| `FRACTION_WIDTH`  | Number of fractional bits. | Yes |
+| `SIGNEDNESS`  | `Fi::SIGNED` for signed values; `Fi::UNSIGNED` for unsigned values. | Yes |
+| `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. | No (Default: `Fi::Throw`) |
+| `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. | No (Default: `Fi::Fix`) |
 
 #### Overflow
 
@@ -48,7 +48,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 | `Fi::Classic` | Round to nearest representable value. Ties are rounded away from zero. |
 | `Fi::Ceil`    | Round towards positive infinity. |
 | `Fi::Floor`   | Round towards negative infinity. |
-| `Fi::Fix`     | Round towards zero. **Default value**. |
+| `Fi::Fix`     | Round towards zero. |
 
 #### Rounding
 
@@ -56,7 +56,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 |:------------|:------------|
 | `Fi::Saturate`  | Saturate value to maximum or minimum value allowed by selected quantization parameters. |
 | `Fi::Wrap`      | Wrap the value around when overflow occurs. |
-| `Fi::Throw`     | When overflow occurs, throw a `Fi::PositiveOverflow` or a `Fi::NegativeOverflow` exception, depending on the direction of the overflow. **Default value**. |
+| `Fi::Throw`     | When overflow occurs, throw a `Fi::PositiveOverflow` or a `Fi::NegativeOverflow` exception, depending on the direction of the overflow. |
 | `Fi::Undefined` | The behavior of overflow is undefined. Use when execution speed is more important than results. |
  
 ## Tests
