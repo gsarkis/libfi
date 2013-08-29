@@ -33,13 +33,13 @@ LibFi is documented using Doxygen. To build the documentation, you need [Doxygen
 ### Quick Reference
 The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` datatype accepts five parameters: 
 
-| Parameter | Description |
-|:------------|:------------|
-| `TOTAL_WIDTH` | Total number of bits in binary representation, including the sign for signed types. |
-| `FRACTION_WIDTH`  | Number of fractional bits. |
-| `SIGNEDNESS`  | `Fi::SIGNED` for signed values; `Fi::UNSIGNED` for unsigned values. |
-| `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. |
-| `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. |
+| Parameter | Description | Required |
+|:------------|:------------|:------------|
+| `TOTAL_WIDTH` | Total number of bits in binary representation, including the sign for signed types. | Yes |
+| `FRACTION_WIDTH`  | Number of fractional bits. | Yes |
+| `SIGNEDNESS`  | `Fi::SIGNED` for signed values; `Fi::UNSIGNED` for unsigned values. | Yes |
+| `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. | No (Default: `Fi::Throw`) |
+| `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. | No (Default: `Fi::Fix`) |
 
 #### Overflow
 
