@@ -1,0 +1,11 @@
+set(BUILDNAME "${BUILDNAME}" CACHE STRING "Name of build on the dashboard")
+
+file(GLOB tests "${PROJECT_SOURCE_DIR}/tests/*_test.cpp")
+foreach( test_path ${tests} )
+  get_filename_component(testname ${test_path} NAME_WE)
+  string(REGEX REPLACE "_test" "" test "${testname}")
+  message(STATUS "Adding test ${test}")
+  add_executable(${test} ${PROJECT_SOURCE_DIR}/tests/${testname}.cpp)
+  target_link_libraries(${test} ${Boost_LIBRARIES})
+  add_test(${test} ${CMAKE_CURRENT_BINARY_DIR}/${test})
+endforeach()
