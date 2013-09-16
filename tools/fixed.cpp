@@ -115,6 +115,6 @@ int main(int argc, char* argv[]) {
 	std::cout << "ERROR: Invalid parameter combination" << std::endl;
 	usage(argv[0]);
 
-	return 1;
+	return 0;
 }
 
