@@ -8,7 +8,7 @@ Unlike most other C++ fixed-point libraries, the word length in Fi does not have
 
 This is a header-only library so you include `./fi/Fixed.hpp`, and any applicable overflow handlers and rounding modes from `./fi/overflow` and `./fi/rounding`.
 
-Here is an example of multiplying 8-bit signed fixed-point numbers with 4 fractional bits and wrap-around overflow handling:
+Here is an example of multiplying 8-bit, signed fixed-point numbers with 4 fractional bits:
 ```cpp
 #include "fi/Fixed.hpp"
 #include "fi/overflow/Wrap.hpp"
@@ -17,8 +17,8 @@ Here is an example of multiplying 8-bit signed fixed-point numbers with 4 fracti
 
 int main(int argc, char* argv[]) {
 
-  Fi::Fixed<8, 4, Fi::SIGNED, Fi::Wrap> a("3.14");
-  Fi::Fixed<8, 4, Fi::SIGNED, Fi::Wrap> b("13.14");
+  Fi::Fixed<8, 4, Fi::SIGNED> a("3.14");
+  Fi::Fixed<8, 4, Fi::SIGNED> b("1.14");
 
   std::cout << a*b << std::endl;
 
