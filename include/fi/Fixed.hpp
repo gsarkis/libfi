@@ -513,7 +513,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fi::Fixed<W, F, S, OF, R> 
+	const Fi::Fixed<W, F, S, OF, R>
 	operator*(const Fi::Fixed<W, F, S, OF, R>& x, 
 	          const Fi::Fixed<W, F, S, OF, R>& y);
 
@@ -524,10 +524,32 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	const Fi::Fixed<W, F, S, OF, R> 
+	const Fi::Fixed<W, F, S, OF, R>
 	operator/(const Fi::Fixed<W, F, S, OF, R>& x, 
 	          const Fi::Fixed<W, F, S, OF, R>& y);
 
+	/**
+	 *\relates Fi::Fixed
+	 *\brief Returns the smaller of two values
+	 */
+	template<std::size_t W, std::size_t F, Fi::Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	const Fi::Fixed<W, F, S, OF, R>
+	min(const Fi::Fixed<W, F, S, OF, R>& x, 
+	    const Fi::Fixed<W, F, S, OF, R>& y);
+
+	/**
+	 *\relates Fi::Fixed
+	 *\brief Returns the greater of two values
+	 */
+	template<std::size_t W, std::size_t F, Fi::Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	const Fi::Fixed<W, F, S, OF, R>
+	max(const Fi::Fixed<W, F, S, OF, R>& x, 
+	    const Fi::Fixed<W, F, S, OF, R>& y);
+	
 	//@}
 
 	/**\name Bit-wise manipulation */
