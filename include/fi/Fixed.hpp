@@ -521,7 +521,7 @@ namespace Fi {
 	 *\relates Fi::Fixed
 	 *\brief Division operator.
 	 */
-	template<Fi::Signedness S, std::size_t W, std::size_t F, 
+	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
 	const Fi::Fixed<W, F, S, OF, R> 
