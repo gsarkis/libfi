@@ -522,6 +522,30 @@ namespace Fi {
 
 	}
 
+	template<std::size_t W, std::size_t F, Fi::Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	const Fixed<W, F, S, OF, R>
+	min(const Fixed<W, F, S, OF, R>& x,
+	    const Fixed<W, F, S, OF, R>& y)
+	{
+
+		return (x < y) ? x : y;
+
+	}
+
+	template<std::size_t W, std::size_t F, Fi::Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	const Fixed<W, F, S, OF, R>
+	max(const Fixed<W, F, S, OF, R>& x,
+	    const Fixed<W, F, S, OF, R>& y)
+	{
+
+		return (x > y) ? x : y;
+
+	}
+
 
 	// Bit-wise manipulation
 	template<std::size_t W, std::size_t F, Signedness S,
