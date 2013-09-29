@@ -286,3 +286,46 @@ BOOST_AUTO_TEST_CASE( s_max_no_i )
 }
 
 BOOST_AUTO_TEST_SUITE_END()
+
+#define L_CHECK_EQ(A, E) BOOST_CHECK_EQUAL((A).toString(), E)
+
+BOOST_AUTO_TEST_SUITE( min_max )
+
+BOOST_AUTO_TEST_CASE( signed_unsigned )
+{
+
+	typedef Fi::Fixed<8, 4, Fi::UNSIGNED> fiu;
+	typedef Fi::Fixed<8, 4, Fi::SIGNED> fis;
+
+	L_CHECK_EQ( Fi::max(fiu(1.25), fiu(2.0)), "2.0" );
+	L_CHECK_EQ( Fi::min(fiu(1.25), fiu(2.0)), "1.25" );
+
+	L_CHECK_EQ( Fi::max(fis(1.25), fis(2.0)), "2.0" );
+	L_CHECK_EQ( Fi::min(fis(-1.25), fis(2.0)), "-1.25" );
+
+	L_CHECK_EQ( Fi::max(fis(1.25), fis(-2.0)), "1.25" );
+	L_CHECK_EQ( Fi::min(fis(-1.25), fis(-2.0)), "-2.0" );
+
+}
+
+BOOST_AUTO_TEST_CASE( fraction_size )
+{
+
+	typedef Fi::Fixed<8, 1, Fi::UNSIGNED> fiu1;
+
+	L_CHECK_EQ( Fi::max(fiu1(1.5), fiu1(2.0)), "2.0" );
+	L_CHECK_EQ( Fi::min(fiu1(1.5), fiu1(2.0)), "1.5" );
+
+}
+
+BOOST_AUTO_TEST_CASE( total_size )
+{
+
+	typedef Fi::Fixed<18, 1, Fi::UNSIGNED> fiu1;
+
+	L_CHECK_EQ( Fi::max(fiu1(11.5), fiu1(12.0)), "12.0" );
+	L_CHECK_EQ( Fi::min(fiu1(11.5), fiu1(12.0)), "11.5" );
+
+}
+
+BOOST_AUTO_TEST_SUITE_END()
