@@ -39,9 +39,14 @@ namespace Fi {
 	struct FixedConversionInternal<true, true, true, SrcT, DstT> {
 		static DstT convert(SrcT src) {
 
+			/* Fails! bug #24
 			DstT dst =
 				DstT::fromBinary(src.toBinary() <<
 				                 (DstT::FRACTION_LENGTH - SrcT::FRACTION_LENGTH));
+			*/
+			DstT dst;
+
+			dst = DstT(src.toString());
 			return dst;
 
 		}

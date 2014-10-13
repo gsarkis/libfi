@@ -86,6 +86,16 @@ BOOST_AUTO_TEST_CASE( u_up_wrap )
 
 }
 
+BOOST_AUTO_TEST_CASE( u_up_wrap_2 )
+{
+
+	typedef Fi::Fixed<9, 5, Fi::SIGNED, Fi::Wrap> fi1;
+	typedef Fi::Fixed<10, 5, Fi::SIGNED, Fi::Wrap> fi2;
+
+	CHECK_EQ( fi2::fromFixed(fi1("-0.15625")), "-0.15625" );
+
+}
+
 BOOST_AUTO_TEST_CASE( u_up_ceil )
 {
 
