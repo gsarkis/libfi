@@ -28,6 +28,7 @@
 #include <utility>
 #include <string>
 #include <algorithm>
+#include <iostream>
 
 namespace Fi {
 
@@ -173,6 +174,54 @@ namespace Fi {
 
 	}
 
+	//This is required to avoid compiler warnings when shifting down by 4 (in TOO_SMALL = true)
+	template<typename T, bool TOO_SMALL>
+	struct Digits;
+
+	template<typename T>
+	struct Digits<T, false> {
+
+		static std::string calculate(typename T::UnsignedType absfrac) {
+
+			std::string ret;
+
+			do {
+				absfrac *= 10;
+				typename T::UnsignedType digit = absfrac >> T::FRACTION_LENGTH;
+
+				ret.push_back(digit + '0');
+				absfrac &= T::F_MASK;
+			} while (absfrac != 0);
+
+			return ret;
+
+		}
+
+	};
+
+	template<typename T>
+	struct Digits<T, true> {
+
+		static std::string calculate(typename T::UnsignedType absfrac) {
+
+			std::string ret;
+
+			do {
+				typename T::UnsignedType digit =
+					(absfrac >> 4)*10 >> (T::FRACTION_LENGTH - 4);
+
+				absfrac *= 10;
+
+				ret.push_back(digit + '0');
+				absfrac &= T::F_MASK;
+			} while (absfrac != 0);
+
+			return ret;
+
+		}
+
+	};
+
 	template<typename T>
 	inline std::string StringConversion::
 	unsignedFractionalString(const typename T::UnsignedType& val) {
@@ -202,6 +251,19 @@ namespace Fi {
 			} while ((msb != 0) || (lsb != 0));
 		}
 		else {
+			ret = Digits<T, ((T::FRACTION_LENGTH + 4) > 8*sizeof(utype))>::calculate(absfrac);
+		}
+		/*
+		else if ((T::FRACTION_LENGTH + 4) > 8*sizeof(utype)) {
+			do {
+				utype digit = (absfrac >> 4)*10 >> (T::FRACTION_LENGTH - 4);
+				absfrac *= 10;
+
+				ret.push_back(digit + '0');
+				absfrac &= T::F_MASK;
+			} while (absfrac != 0);
+		}
+		else {
 			do {
 				absfrac *= 10;
 				utype digit = absfrac >> T::FRACTION_LENGTH;
@@ -210,6 +272,7 @@ namespace Fi {
 				absfrac &= T::F_MASK;
 			} while (absfrac != 0);
 		}
+		*/
 
 		return ret;
 
