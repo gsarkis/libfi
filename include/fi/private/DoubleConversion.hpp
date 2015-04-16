@@ -77,6 +77,7 @@ namespace Fi {
 	toFixedPoint(double number) {
 
 		typedef typename TR::SignedType sType;
+		typedef typename TR::UnsignedType uType;
 
 		double step = 1.0/std::pow(2.0, TR::FRACTION_LENGTH);
 		//Safe to multiply by 2.0 since we ensure the type fits below.
@@ -87,7 +88,7 @@ namespace Fi {
 
 		double g = DoubleConversion::limitToRange(number, lower, upper);
 
-		sType one = 1;
+		uType one = 1;
 		sType s = 0;
 		if (2*TR::FRACTION_LENGTH == 8*sizeof(sType)) {
 			//Subtracting 1 from 2*FRACTION_LENGTH to avoid overflow to 0.
