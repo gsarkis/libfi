@@ -41,7 +41,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 | `OVERFLOW`    | Behavior when a number overflows the range representable using the selected quantization parameters. See below for valid options. | No (Default: `Fi::Throw`) |
 | `ROUNDING`    | Behavior when a number is not representable using the selected quantization parameters. See below for valid options. | No (Default: `Fi::Fix`) |
 
-#### Overflow
+#### Rounding
 
 | Mode | Description |
 |:------------|:------------|
@@ -50,7 +50,7 @@ The `Fi::Fixed<TOTAL_WIDTH, FRACTION_WIDTH, SIGNEDNESS, OVERFLOW, ROUNDING>` dat
 | `Fi::Floor`   | Round towards negative infinity. |
 | `Fi::Fix`     | Round towards zero. |
 
-#### Rounding
+#### Overflow
 
 | Mode | Description |
 |:------------|:------------|
