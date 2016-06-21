@@ -65,7 +65,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
-	CFixed<W, F, S, OF, R>::operator=(const CFixed<W, F, S, OF, R>& that) {
+	CFixed<W, F, S, OF, R>& CFixed<W, F, S, OF, R>::
+	operator=(const CFixed<W, F, S, OF, R>& that) {
 		this->_real= that._real;
 		this->_imag= that._imag;
 		return *this;
@@ -74,7 +75,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
-	CFixed<W, F, S, OF, R>::operator+=(const CFixed<W, F, S, OF, R>& that) {
+	CFixed<W, F, S, OF, R>& CFixed<W, F, S, OF, R>::
+	operator+=(const CFixed<W, F, S, OF, R>& that) {
 		_real+= that._real;
 		_imag+= that._imag;
 		return *this;
@@ -83,7 +85,8 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
-	CFixed<W, F, S, OF, R>::operator-=(const CFixed<W, F, S, OF, R>& that) {
+	CFixed<W, F, S, OF, R>& CFixed<W, F, S, OF, R>::
+	operator-=(const CFixed<W, F, S, OF, R>& that) {
 		_real-= that._real;
 		_imag-= that._imag;
 		return *this;
@@ -125,7 +128,7 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
-	CFixed<W, F, S, OF, R>::toDouble() const {
+	std::complex<double> CFixed<W, F, S, OF, R>::toDouble() const {
 		std::complex<double> cdbl(_real.toDouble(), _imag.toDouble());
 		return cdbl;
 	}
@@ -133,14 +136,14 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	Fixed<W,F,S,OF,R> real() const {
+	Fixed<W,F,S,OF,R> CFixed<W, F, S, OF, R>::real() const {
 		return _real;
 	}
 
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
-	Fixed<W,F,S,OF,R> imag() const {
+	Fixed<W,F,S,OF,R> CFixed<W, F, S, OF, R>::imag() const {
 		return _imag;
 	}		
 
@@ -194,7 +197,7 @@ namespace Fi {
 	         template <typename> class R>
 	const Fi::CFixed<W, F, S, OF, R> 
 	operator-(const Fi::CFixed<W, F, S, OF, R>& a)	{
-		CFixed<W,F,S,OF,R> ret();
+		CFixed<W,F,S,OF,R> ret;
 		ret._real-= a._real;
 		ret._imag-= a._imag;
 		return ret;
@@ -229,7 +232,7 @@ namespace Fi {
 	         template <typename> class R>
 	Fi::Fixed<W, F, S, OF, R> std::real(const Fi::CFixed<W, F, S, OF, R>& x)
 	{
-		return x._real;
+		return x.real();
 	}
 
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
@@ -237,33 +240,33 @@ namespace Fi {
 	         template <typename> class R>
 	Fi::Fixed<W, F, S, OF, R> std::imag(const Fi::CFixed<W, F, S, OF, R>& x)
 	{
-		return x._imag;
+		return x.imag();
 	}
 	
-	template<std::size_t W, std::size_t F, Fi::Signedness S,
-	         template <typename> class OF,
-	         template <typename> class R>
-	Fi::Fixed<W, F, S, OF, R> std::abs(const Fi::CFixed<W, F, S, OF, R>& x)
-	{
-		double result= sqrt(x.norm().toDouble());
-		return Fi::Fixed<W,F,S,OF,R>(result);
-	}
+	// template<std::size_t W, std::size_t F, Fi::Signedness S,
+	//          template <typename> class OF,
+	//          template <typename> class R>
+	// Fi::Fixed<W, F, S, OF, R> std::abs(const Fi::CFixed<W, F, S, OF, R>& x)
+	// {
+	// 	double result= std::abs(x.toDouble());
+	// 	return Fi::Fixed<W,F,S,OF,R>(result);
+	// }
 
-	template<std::size_t W, std::size_t F, Fi::Signedness S,
-	         template <typename> class OF,
-	         template <typename> class R>
-	Fi::Fixed<W, F, S, OF, R> std::arg(const Fi::CFixed<W, F, S, OF, R>& x)
-	{
-		double result= atan2(x.imag(),x.real());
-		return Fi::Fixed<W,F,S,OF,R>(result);
-	}
+	// template<std::size_t W, std::size_t F, Fi::Signedness S,
+	//          template <typename> class OF,
+	//          template <typename> class R>
+	// Fi::Fixed<W, F, S, OF, R> std::arg(const Fi::CFixed<W, F, S, OF, R>& x)
+	// {
+	// 	double result= atan2(x.imag().toDouble(), x.real().toDouble());
+	// 	return Fi::Fixed<W,F,S,OF,R>(result);
+	// }
 
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
 	Fi::Fixed<W, F, S, OF, R> std::norm(const Fi::CFixed<W, F, S, OF, R>& x)
 	{
-		return x._real * x._real + x._imag * x._imag;
+		return x.real() * x.real() + x.imag() * x.imag();
 	}
 
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
@@ -271,10 +274,7 @@ namespace Fi {
 	         template <typename> class R>
 	Fi::CFixed<W, F, S, OF, R> std::conj(const Fi::CFixed<W, F, S, OF, R>& x)
 	{
-		CFixed<W,F,S,OF,R> ret();
-		ret._real= x._real;
-		ret._imag= -x._imag;
-		return ret;
+		return Fi::CFixed<W,F,S,OF,R>(x.real(), -x.imag());
 	}
 
 #endif

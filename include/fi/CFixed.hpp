@@ -22,6 +22,15 @@
 #ifndef FI_CFIXED_HPP
 #define FI_CFIXED_HPP
 
+#include "fi/Fixed.hpp"
+
+#include "overflow/Throw.hpp"
+#include "rounding/Fix.hpp"
+
+#include <cstddef>
+#include <cmath>
+#include <complex>
+
 namespace Fi {
 
 	/**\brief Complex number composed of two Fi::Fixed values with identical parameters
@@ -40,7 +49,7 @@ namespace Fi {
 	         template <typename> class OF=Fi::Throw,
 	         template <typename> class R=Fi::Fix>
 	class CFixed {
-
+	public:
 		/**
 		 *\brief Create a new CFixed object initialized to zero.
 		 */		
@@ -125,17 +134,17 @@ namespace Fi {
 		/**
 		 * Returns the real part.
 		 */
-		Fixed real() const;
+		Fi::Fixed<W,F,S,OF,R> real() const;
 
 		/**
 		 * Returns the imaginary part.
 		 */
-		Fixed imag() const;
+		Fi::Fixed<W,F,S,OF,R> imag() const;
 
 	private:
 
-		Fixed<W,F,S,OF,R> _real;
-		Fixed<W,F,S,OF,R> _imag;
+		Fi::Fixed<W,F,S,OF,R> _real;
+		Fi::Fixed<W,F,S,OF,R> _imag;
 
 	}; // end class CFixed
 
@@ -240,15 +249,15 @@ namespace std {
 	         template <typename> class R>
 	Fi::Fixed<W, F, S, OF, R> imag(const Fi::CFixed<W, F, S, OF, R>& x);
 	
-	template<std::size_t W, std::size_t F, Fi::Signedness S,
-	         template <typename> class OF,
-	         template <typename> class R>
-	Fi::Fixed<W, F, S, OF, R> abs(const Fi::CFixed<W, F, S, OF, R>& x);
+	// template<std::size_t W, std::size_t F, Fi::Signedness S,
+	//          template <typename> class OF,
+	//          template <typename> class R>
+	// Fi::Fixed<W, F, S, OF, R> abs(const Fi::CFixed<W, F, S, OF, R>& x);
 
-	template<std::size_t W, std::size_t F, Fi::Signedness S,
-	         template <typename> class OF,
-	         template <typename> class R>
-	Fi::Fixed<W, F, S, OF, R> arg(const Fi::CFixed<W, F, S, OF, R>& x);
+	// template<std::size_t W, std::size_t F, Fi::Signedness S,
+	//          template <typename> class OF,
+	//          template <typename> class R>
+	// Fi::Fixed<W, F, S, OF, R> arg(const Fi::CFixed<W, F, S, OF, R>& x);
 
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,
