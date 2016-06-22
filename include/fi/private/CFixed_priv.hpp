@@ -84,6 +84,14 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
+	bool CFixed<W, F, S, OF, R>::
+	operator==(const CFixed<W, F, S, OF, R>& that) const {
+		return _real == that._real && _imag == that._imag;
+	}
+
+	template<std::size_t W, std::size_t F, Fi::Signedness S, 
+	         template <typename> class OF,
+	         template <typename> class R>
 	CFixed<W, F, S, OF, R>& CFixed<W, F, S, OF, R>::
 	operator+=(const CFixed<W, F, S, OF, R>& that) {
 		_real+= that._real;
