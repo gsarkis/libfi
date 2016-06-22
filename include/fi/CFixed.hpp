@@ -70,6 +70,13 @@ namespace Fi {
 		CFixed(double realf, double imagf);
 
 		/**
+		 * Creates a new CFixed object from a std::complex<double> object.
+		 *
+		 *\param c  A complex number.
+		 */
+		CFixed(std::complex<double>& c);
+
+		/**
 		 *\brief Creates a new CFixed object from two Fixed objects.
 		 */
 		CFixed(const Fixed<W,F,S,OF,R>& real, const Fixed<W,F,S,OF,R>& imag);

@@ -56,6 +56,15 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
+	CFixed<W, F, S, OF, R>::CFixed(std::complex<double>& c)
+	{
+		_real= Fixed<W,F,S,OF,R>(c.real());
+		_imag= Fixed<W,F,S,OF,R>(c.imag());
+	}
+
+	template<std::size_t W, std::size_t F, Fi::Signedness S, 
+	         template <typename> class OF,
+	         template <typename> class R>
 	CFixed<W, F, S, OF, R>::CFixed(const Fixed<W,F,S,OF,R>& real,
 	                               const Fixed<W,F,S,OF,R>& imag)
 		: _real(real),
