@@ -245,6 +245,22 @@ namespace Fi {
 		Fixed& operator*=(const Fixed& x);
 
 		/**
+		 * Multiply this object by a Fixed object with different width
+		 * parameters.
+		 *
+		 *\param x Multiplicand
+		 *\tparam W2 Width of multiplicand.
+		 *\tparam F2 Number of fractional bits in multiplicand.
+		 *\tparam S2 Signedness of multiplicand.
+		 *\tparam OF2 Overflow handler of the multiplicand.
+		 *\tparam R2 Rounding method of the multiplicand.
+		 */
+		template<std::size_t W2, std::size_t F2, Fi::Signedness S2, 
+		         template <typename> class OF2,
+		         template <typename> class R2>
+		Fixed& operator*=(const Fixed<W2, F2, S2, OF2, R2>& x);
+
+		/**
 		 *\brief Divide and store operator.
 
 		 *Divides the current value by \c x.

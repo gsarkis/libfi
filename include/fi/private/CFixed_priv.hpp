@@ -122,18 +122,27 @@ namespace Fi {
 	}
 		
 	
-	//TODO: multiplication with operands having different widths
-	// template<std::size_t W, std::size_t F, Fi::Signedness S, 
-	//          template <typename> class OF,
-	//          template <typename> class R>
-	// template<std::size_t W2, std::size_t F2, Fi::Signedness S2, 
-	//          template <typename> class OF2,
-	//          template <typename> class R2>
-	// CFixed<W,F,S,OF,R>& CFixed<W, F, S, OF, R>::
-	// operator*=(const CFixed<W2, F2, S2, OF2, R2>& that) {
-	// 	// perform the operation using the maximum width and fractional
-	// 	// width of both operands
-	// }
+	template<std::size_t W, std::size_t F, Fi::Signedness S, 
+	         template <typename> class OF,
+	         template <typename> class R>
+	template<std::size_t W2, std::size_t F2, Fi::Signedness S2, 
+	         template <typename> class OF2,
+	         template <typename> class R2>
+	CFixed<W,F,S,OF,R>& CFixed<W, F, S, OF, R>::
+	operator*=(const CFixed<W2, F2, S2, OF2, R2>& that) {
+		Fixed<W,F,S,OF,R> z1= _real;
+		z1*= that.real();
+		Fixed<W,F,S,OF,R> z2= _imag;
+		z2*= that.imag();
+		Fixed<W,F,S,OF,R> z3= _real;
+		z3*= that.imag();
+		Fixed<W,F,S,OF,R> z4= _imag;
+		z4*= that.real();
+
+		_real= z1 - z2;
+		_imag= z3 + z4;
+		return *this;
+	}
 
 	// template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	//          template <typename> class OF=Fi::Throw,

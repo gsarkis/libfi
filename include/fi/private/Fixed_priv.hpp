@@ -187,6 +187,27 @@ namespace Fi {
 
 	}
 
+	template<std::size_t W, std::size_t F, Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	template<std::size_t W2, std::size_t F2, Signedness S2,
+	         template <typename> class OF2,
+	         template <typename> class R2>
+	Fixed<W, F, S, OF, R>& Fixed<W, F, S, OF, R>::
+	operator*=(const Fixed<W2,F2,S2,OF2,R2>& x) {
+		typedef Fixed<W2, F2, S2, OF2, R2> ArgType;
+		typedef Fixed<W,F,S,OF,R> ResultType;
+		//typedef Fixed<W+std::max<size_t>(F2-F,0),std::max<size_t>(F,F2),S,OF,R> WorkType;
+		typedef Fixed<W+W2,F+F2,S,OF,R> WorkType;
+
+		WorkType a = FixedConversion<ArgType, WorkType>::convert(x);
+		WorkType b = FixedConversion<ResultType, WorkType>::convert(*this);
+
+		WorkType c= a * b;
+		ResultType result= FixedConversion<WorkType, ResultType>::convert(c);
+		_val= result._val;
+		return *this;
+	}
 
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
