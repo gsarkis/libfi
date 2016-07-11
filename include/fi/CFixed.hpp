@@ -145,6 +145,24 @@ namespace Fi {
 		// CFixed& operator/=(const CFixed& x);		
 
 		/**
+		 *\brief Binary right-shift and store of both the real and imaginary parts.
+		 *\param pos Number of positions to shift the bits.
+
+		 *\warning For unsigned numbers, zeros are shifted in.
+		 *However, for signed numbers, the behavior is defined by
+		 *the compiler.
+		 */		
+		CFixed& operator>>=(std::size_t pos);
+
+		/**
+		 *\brief Binary left-shift and store of both the real and imaginary parts.
+		 *\param pos Number of positions to shift the bits.
+
+		 *\note Zeros are shifted in.
+		 */		
+		CFixed& operator<<=(std::size_t pos);
+		
+		/**
 		 *\brief Convert to \c std::complex<double>.
 
 		 *Converts the fixed-point complex number to std::complex<double>.

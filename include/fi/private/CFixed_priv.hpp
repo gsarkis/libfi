@@ -151,6 +151,24 @@ namespace Fi {
 
 	// }
 
+	template<std::size_t W, std::size_t F, Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	CFixed<W,F,S,OF,R>& CFixed<W,F,S,OF,R>::operator>>=(std::size_t pos) {
+		_real >>= pos;
+		_imag >>= pos;
+		return *this;
+	}
+
+	template<std::size_t W, std::size_t F, Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	CFixed<W,F,S,OF,R>& CFixed<W,F,S,OF,R>::operator<<=(std::size_t pos) {
+		_real <<= pos;
+		_imag <<= pos;
+		return *this;
+	}
+
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
