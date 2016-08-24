@@ -374,6 +374,16 @@ namespace Fi {
 		std::string toString() const;
 
 		/**
+		 *\brief String representation of number with zero padding or truncation.
+
+		 *\param nbDigits Total number of digits used to represent the integer 
+		 *                and fractional parts.
+
+		 *\returns string representation.
+		 */
+		std::string toString(unsigned int nbDigits) const;		
+
+		/**
 		 *\brief Returns a string containing the binary representation of number.
 
 		 *\return Binary representation of number.

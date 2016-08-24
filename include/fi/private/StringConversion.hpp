@@ -60,6 +60,21 @@ namespace Fi {
 
 		/**
 		 *\internal
+		 *\brief Convert the fractional part of a fixed-point number to string, 
+		 *       with the ability to adjust the string length.
+
+		 *\tparam T Traits of target fixed-point type.
+		 *\param val An integer representing a fixed-point number.
+		 *\param length Desired number of digits in the string.
+
+		 *\return String representation of the fractional part.
+		 */
+		template<typename T>
+		std::string fractionalString(const typename T::valtype& val,
+		                             unsigned int length);		
+
+		/**
+		 *\internal
 		 *\brief Convert the fractional part of a fixed-point number to string
 		 *assuming the input is unsigned.
 
@@ -82,6 +97,21 @@ namespace Fi {
 		 */
 		template<typename T>
 		std::string toString(const typename T::valtype& val);
+
+		/**
+		 *\internal
+		 *\brief Convert a fixed-point number to string with the ability to
+		 *       adjust the length of the fractional part.
+
+		 *\tparam T Traits of target fixed-point type.
+		 *\param val An integer representing a fixed-point number.
+		 *\param nbDigits The total number of digits, including the integer part.
+
+		 *\return String representation of the fixed-point number.
+		 */
+		template<typename T>
+		std::string toString(const typename T::valtype& val,
+		                     unsigned int nbDigits);		
 
 		/**
 		 *\internal
@@ -172,6 +202,22 @@ namespace Fi {
 
 		return ret;
 
+	}
+
+	template<typename T>
+	inline std::string StringConversion::
+	fractionalString(const typename T::valtype& val,
+	                 unsigned int length) {
+		std::string str= fractionalString<T>(val);
+		if(str.length() > length) {
+			// truncate
+			return str.substr(0, length);
+		}
+		// otherwise pad with zeroes
+		while(str.length() < length) {
+			str= str + "0";
+		}
+		return str;
 	}
 
 	//This is required to avoid compiler warnings when shifting down by 4 (in TOO_SMALL = true)
@@ -285,6 +331,19 @@ namespace Fi {
 
 		return integerString<T>(val) + "." + fractionalString<T>(val);
 
+	}
+
+	template<typename T>
+	inline std::string StringConversion::
+	toString(const typename T::valtype& val, unsigned int nbDigits) {
+
+		std::string intPart= integerString<T>(val);
+		unsigned int nbIntDigits= intPart.length();
+		if ((val & T::S_MASK) != 0) nbIntDigits--; // don't count the "-" sign
+		std::string fracPart= fractionalString<T>(val,
+		                                          nbDigits - nbIntDigits);
+		return intPart + "." + fracPart;
+		
 	}
 
 	template<typename T>

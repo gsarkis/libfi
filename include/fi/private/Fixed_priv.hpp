@@ -348,6 +348,14 @@ namespace Fi {
 	         template <typename> class OF,
 	         template <typename> class R>
 	std::string Fixed<W, F, S, OF, R>::
+	toString(unsigned int nbDigits) const {
+		return StringConversion::toString<TR>(_val, nbDigits);
+	}
+
+	template<std::size_t W, std::size_t F, Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	std::string Fixed<W, F, S, OF, R>::
 	toBinaryString() const {
 
 		std::string ret;
