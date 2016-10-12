@@ -82,6 +82,21 @@ namespace Fi {
 		CFixed(const Fixed<W,F,S,OF,R>& real, const Fixed<W,F,S,OF,R>& imag);
 
 		/**
+		 *\brief Creates a new CFixed object by converting another.
+		 *\param src Source complex fixed-point number.
+		 *\return A CFixed object.
+		 *\tparam W2 Width of source number.
+		 *\tparam F2 Number of fractional bits in source number.
+		 *\tparam S2 Signedness of source number.
+		 *\tparam OF2 Overflow handler of the source number.
+		 *\tparam R2 Rounding method of the source number.
+		 */
+		template<std::size_t W2, std::size_t F2, Fi::Signedness S2, 
+		         template <typename> class OF2,
+		         template <typename> class R2>
+		static CFixed fromCFixed(const CFixed<W2, F2, S2, OF2, R2>& src);
+		
+		/**
 		 *\brief Assignment operator.
 		 *\param that CFixed object to assign from.
 		 */

@@ -71,6 +71,22 @@ namespace Fi {
 		  _imag(imag)
 	{}
 
+	template<std::size_t W, std::size_t F, Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	template<std::size_t W2, std::size_t F2, Signedness S2,
+	         template <typename> class OF2,
+	         template <typename> class R2>
+	CFixed<W, F, S, OF, R>
+	CFixed<W, F, S, OF, R>::fromCFixed(const CFixed<W2, F2, S2, OF2, R2>& src) {
+
+		typedef Fixed<W, F, S, OF, R> DstType;
+
+		CFixed<W,F,S,OF,R> val(DstType::fromFixed(src.real()),
+		                       DstType::fromFixed(src.imag()));
+		return val;
+	}
+
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,
 	         template <typename> class R>
