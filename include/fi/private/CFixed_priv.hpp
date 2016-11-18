@@ -136,7 +136,20 @@ namespace Fi {
 		_imag= newImag;
 		return *this;
 	}
-		
+
+	template<std::size_t W, std::size_t F, Fi::Signedness S, 
+	         template <typename> class OF,
+	         template <typename> class R>
+	CFixed<W,F,S,OF,R>& CFixed<W, F, S, OF, R>::
+	multLShiftEq(const CFixed<W,F,S,OF,R>& that, int shAmnt) {
+		Fixed<W,F,S,OF,R> newReal= multLShift(_real,that.real(),shAmnt)
+			- multLShift(_imag,that.imag(),shAmnt);
+		Fixed<W,F,S,OF,R> newImag= multLShift(_real,that.imag(),shAmnt)
+			+ multLShift(_imag,that.real(),shAmnt);
+		_real= newReal;
+		_imag= newImag;
+		return *this;		
+	}
 	
 	template<std::size_t W, std::size_t F, Fi::Signedness S, 
 	         template <typename> class OF,

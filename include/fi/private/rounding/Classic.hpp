@@ -55,6 +55,22 @@ namespace Fi {
 		round(const typename T::valtype& n);
 
 		/**\internal
+		 *\brief Round a number towards zero with left-shift.
+
+		 * The shift amount is applied before rounding, allowing to save
+		 * some fractional bits at the expense of a reduced range.
+
+		 *\param n      Fixed-point number to be rounded.
+		 *\param shAmnt Left-shift amount.
+		 *
+		 *\return The rounded value and -1 (+1) indicating that
+		 *positive (negative) numbers can decrease (increase) in value
+		 *as a result of rounding, or 0 if the input \c n is zero.
+		 */		
+		static std::pair<typename T::valtype, int>
+		roundLShift(const typename T::valtype& n, int shAmnt);
+
+		/**\internal
 		 *\brief Round a number towards zero.
 		 *\param fl Original floating-point number.
 		 *\param n Fixed-point number to be rounded.
@@ -110,6 +126,43 @@ round(const typename T::valtype& n) {
 
 	return std::make_pair(ret, direction);
 
+}
+
+template <typename T>
+inline std::pair<typename T::valtype, int> Fi::Classic<T>::
+roundLShift(const typename T::valtype& n, int shAmnt) {
+
+	if(shAmnt<0 || static_cast<std::size_t>(shAmnt) > T::FRACTION_LENGTH) {
+		throw std::runtime_error("Invalid shift amount");
+	}
+	int direction = 0;
+	typename T::valtype ret(n);
+	typename T::valtype fmask(T::F_MASK);
+	fmask>>= shAmnt;
+	
+	if(n != 0 && static_cast<std::size_t>(shAmnt) != T::FRACTION_LENGTH) {
+
+		ret = (n & ~fmask) >> (T::FRACTION_LENGTH - shAmnt);
+
+		if ((T::SIGNEDNESS == SIGNED) && (n <= 0)) {
+			direction = 0;
+			if ((n & fmask) > (1 << (T::FRACTION_LENGTH-shAmnt-1))) {
+				ret += 1;
+				direction = -1;
+			}
+		}
+		else {
+			direction = -1;
+			if ((n & fmask) >= (1 << (T::FRACTION_LENGTH-shAmnt-1))) {
+				ret += 1;
+				direction = 1;
+			}
+		}
+
+	}
+
+	return std::make_pair(ret, direction);
+	
 }
 
 template <typename T>

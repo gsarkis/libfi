@@ -245,6 +245,17 @@ namespace Fi {
 		Fixed& operator*=(const Fixed& x);
 
 		/**
+		 *\brief Multiply, shift left, and store.
+
+		 *Multiplies the current value by \c x, and shifts the result left
+		 *by \c shAmnt before rounding.
+
+		 *\param x      Multiplicand.
+		 *\param shAmnt Left-shift amount.
+		 */		
+		Fixed& multLShiftEq(const Fixed& x, int shAmnt);
+
+		/**
 		 * Multiply this object by a Fixed object with different width
 		 * parameters.
 		 *
@@ -541,6 +552,21 @@ namespace Fi {
 	const Fi::Fixed<W, F, S, OF, R>
 	operator*(const Fi::Fixed<W, F, S, OF, R>& x, 
 	          const Fi::Fixed<W, F, S, OF, R>& y);
+
+	/**
+	 *\relates Fi::Fixed
+	 *\brief Multiply-and-left-shift operator
+	 *
+	 * Multiplies \c x by \c y, and shifts the result left by \c shAmnt
+	 * before rounding.
+	 */
+	template<std::size_t W, std::size_t F, Fi::Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	const Fi::Fixed<W, F, S, OF, R>	
+	multLShift(const Fi::Fixed<W, F, S, OF, R>& x, 
+	           const Fi::Fixed<W, F, S, OF, R>& y,
+	           int shAmnt);
 
 	/**
 	 *\relates Fi::Fixed

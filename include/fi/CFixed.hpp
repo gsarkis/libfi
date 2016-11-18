@@ -151,6 +151,15 @@ namespace Fi {
 		CFixed& operator*=(const CFixed<W2,F2,S2,OF2,R2>& x);
 
 		/**
+		 *\brief Multiply and store with built-in left-shift.
+		 *
+		 * Multiply and store in which the result of the real
+		 * multiplications is first shifted left by \c shAmnt before being
+		 * rounded.
+		 */
+		CFixed& multLShiftEq(const CFixed& x, int shAmnt);
+
+		/**
 		 *\brief Divide and store operator.
 
 		 *Divides the current value by \c x.

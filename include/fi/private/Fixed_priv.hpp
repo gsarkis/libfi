@@ -190,6 +190,20 @@ namespace Fi {
 	template<std::size_t W, std::size_t F, Signedness S,
 	         template <typename> class OF,
 	         template <typename> class R>
+	Fixed<W, F, S, OF, R>& Fixed<W, F, S, OF, R>::	
+	multLShiftEq(const Fixed<W, F, S, OF, R>& x, int shAmnt) {
+		//Since overflow behavior is undefined for OverflowImpossible
+		//and all other overflow mechanisms guarantee 2W bits for internal
+		//type, it is ok to not explicitly use a larger type.
+		_val *= x._val;
+		_val = RH::roundLShift(_val,shAmnt).first;
+		_val = OFH::fromFixedPoint(_val);
+		return *this;
+	}
+
+	template<std::size_t W, std::size_t F, Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
 	template<std::size_t W2, std::size_t F2, Signedness S2,
 	         template <typename> class OF2,
 	         template <typename> class R2>
@@ -536,6 +550,18 @@ namespace Fi {
 
 	}
 
+	template<std::size_t W, std::size_t F, Signedness S,
+	         template <typename> class OF,
+	         template <typename> class R>
+	const Fixed<W, F, S, OF, R>
+	multLShift(const Fixed<W, F, S, OF, R>& x,
+	           const Fixed<W, F, S, OF, R>& y,
+	           int shAmnt)
+	{
+		Fixed<W, F, S, OF, R> ret(x);
+		ret.multLShiftEq(y, shAmnt);
+		return ret;
+	}
 
 	template<std::size_t W, std::size_t F, Fi::Signedness S,
 	         template <typename> class OF,

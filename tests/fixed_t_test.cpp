@@ -3,6 +3,7 @@
 #include "fi/overflow/Saturate.hpp"
 #include "fi/overflow/Throw.hpp"
 #include "fi/overflow/Wrap.hpp"
+#include "fi/rounding/Classic.hpp"
 
 #define BOOST_TEST_DYN_LINK true
 #define BOOST_TEST_MODULE Fixed
@@ -178,10 +179,103 @@ BOOST_AUTO_TEST_CASE( saturate_div )
 
 }
 
+//TODO: implement Fix::multLShift
+// BOOST_AUTO_TEST_CASE( saturate_mul_shift )
+// {
+// 	fi8s a("0");
+// 	fi8s b("6.234");
+// 	CHECK_EQ(a.multLShift(b, 0), "0.0");
+// }
+
 BOOST_AUTO_TEST_SUITE_END()
 
 ////////////////////////////////////////////////////////////////////////////////
 
+typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Saturate, Fi::Classic> fi8sCl;
+
+BOOST_AUTO_TEST_SUITE(Saturate_Classic)
+BOOST_AUTO_TEST_CASE( sat_classic_fp_construction )
+{
+	CHECK_EQ(fi8sCl(1e20), "7.9375" );
+	CHECK_EQ(fi8sCl(9.0), "7.9375" );
+	CHECK_EQ(fi8sCl(7.9375), "7.9375");	
+	CHECK_EQ(fi8sCl(4.123), "4.125");
+	CHECK_EQ(fi8sCl(1.0f), "1.0");
+	CHECK_EQ(fi8sCl(0.0), "0.0");
+	CHECK_EQ(fi8sCl(-0.0), "0.0");
+	CHECK_EQ(fi8sCl(-1.0), "-1.0");
+	CHECK_EQ(fi8sCl(-4.123f), "-4.125");
+	CHECK_EQ(fi8sCl(-8.0), "-8.0");
+	CHECK_EQ(fi8sCl(-9.0), "-8.0");
+	CHECK_EQ(fi8sCl(-1e20), "-8.0");
+}
+
+BOOST_AUTO_TEST_CASE( saturate_mul_shift )
+{
+	// Directed
+	CHECK_EQ(multLShift(fi8sCl("0"),fi8sCl("6.234"), 0), "0.0");
+	BOOST_CHECK_THROW(multLShift(fi8sCl("0"),fi8sCl("6.234"), -1),
+	                  std::runtime_error);
+	BOOST_CHECK_THROW(multLShift(fi8sCl("0"),fi8sCl("6.234"), 5),
+	                  std::runtime_error);
+	CHECK_EQ(multLShift(fi8sCl("0"),fi8sCl("6.234"), 2), "0.0");
+
+	CHECK_EQ(multLShift(fi8sCl("1.0"),fi8sCl("1.125"), 0), "1.125");
+	CHECK_EQ(multLShift(fi8sCl("1.0"),fi8sCl("1.125"), 1), "2.25");
+	CHECK_EQ(multLShift(fi8sCl("0.5"),fi8sCl("0.0625"),0), "0.0625");
+	CHECK_EQ(multLShift(fi8sCl("0.5"),fi8sCl("0.0625"),1), "0.0625");
+	CHECK_EQ(multLShift(fi8sCl("0.25"),fi8sCl("0.0625"),0), "0.0");
+	CHECK_EQ(multLShift(fi8sCl("0.25"),fi8sCl("0.0625"),1), "0.0625");
+	CHECK_EQ(multLShift(fi8sCl("0.25"),fi8sCl("0.0625"),2), "0.0625");
+	CHECK_EQ(multLShift(fi8sCl("1.5"),fi8sCl("0.0625"),0), "0.125");	
+	CHECK_EQ(multLShift(fi8sCl("1.5"),fi8sCl("0.0625"),1), "0.1875");
+
+	CHECK_EQ(multLShift(fi8sCl("-1.0"),fi8sCl("1.125"), 0), "-1.125");
+	CHECK_EQ(multLShift(fi8sCl("-1.0"),fi8sCl("1.125"), 1), "-2.25");
+	CHECK_EQ(multLShift(fi8sCl("-0.5"),fi8sCl("0.0625"),0), "-0.0625");
+	CHECK_EQ(multLShift(fi8sCl("-0.5"),fi8sCl("0.0625"),1), "-0.0625");	
+	CHECK_EQ(multLShift(fi8sCl("-0.25"),fi8sCl("0.0625"),0), "0.0");
+	CHECK_EQ(multLShift(fi8sCl("-0.25"),fi8sCl("0.0625"),1), "-0.0625");
+	CHECK_EQ(multLShift(fi8sCl("-0.25"),fi8sCl("0.0625"),2), "-0.0625");
+	CHECK_EQ(multLShift(fi8sCl("-1.5"),fi8sCl("0.0625"),0), "-0.125");	
+	CHECK_EQ(multLShift(fi8sCl("-1.5"),fi8sCl("0.0625"),1), "-0.1875");
+
+	CHECK_EQ(multLShift(fi8sCl("7.9375"),fi8sCl("7.9375"), 0), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("7.9375"),fi8sCl("7.9375"), 1), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("7.9375"),fi8sCl("7.9375"), 2), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("7.9375"),fi8sCl("7.9375"), 3), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("7.9375"),fi8sCl("7.9375"), 4), "7.9375");
+	
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("7.9375"), 0), "-8.0");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("7.9375"), 1), "-8.0");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("7.9375"), 2), "-8.0");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("7.9375"), 3), "-8.0");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("7.9375"), 4), "-8.0");
+
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("-8.0"), 0), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("-8.0"), 1), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("-8.0"), 2), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("-8.0"), 3), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("-8.0"),fi8sCl("-8.0"), 4), "7.9375");
+
+	// Semi-Random
+	CHECK_EQ(multLShift(fi8sCl("-0.825705595476718"),fi8sCl("-3.205362909730596"),0),
+	         "2.5625");
+	CHECK_EQ(multLShift(fi8sCl("-0.8125"),fi8sCl("-3.1875"),1), "5.1875");
+	CHECK_EQ(multLShift(fi8sCl("-0.8125"),fi8sCl("-3.1875"),2), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("-0.8125"),fi8sCl("-3.1875"),3), "7.9375");
+	CHECK_EQ(multLShift(fi8sCl("-0.8125"),fi8sCl("-3.1875"),4), "7.9375");
+
+	CHECK_EQ(multLShift(fi8sCl("0.4375"),fi8sCl("-4.5"),0), "-2.0");
+	CHECK_EQ(multLShift(fi8sCl("0.4375"),fi8sCl("-4.5"),1), "-3.9375");
+	CHECK_EQ(multLShift(fi8sCl("0.4375"),fi8sCl("-4.5"),2), "-7.875");
+	CHECK_EQ(multLShift(fi8sCl("0.4375"),fi8sCl("-4.5"),3), "-8.0");
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+	
+////////////////////////////////////////////////////////////////////////////////
+	
 typedef Fi::Fixed<8, 4, Fi::SIGNED, Fi::Wrap> fi8w;
 
 BOOST_AUTO_TEST_SUITE(Wrap)
