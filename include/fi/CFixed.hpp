@@ -160,15 +160,6 @@ namespace Fi {
 		CFixed& multLShiftEq(const CFixed& x, int shAmnt);
 
 		/**
-		 *\brief Divide and store operator.
-
-		 *Divides the current value by \c x.
-
-		 *\param x Divisor.
-		 */
-		// CFixed& operator/=(const CFixed& x);		
-
-		/**
 		 *\brief Binary right-shift and store of both the real and imaginary parts.
 		 *\param pos Number of positions to shift the bits.
 
