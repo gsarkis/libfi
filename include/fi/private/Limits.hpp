@@ -49,7 +49,7 @@ namespace Fi {
 	};
 
 	template<typename T, std::size_t W> struct MinVal<T, W, SIGNED> {
-		static const T value = (T(1) << (W-1)) | (T(-1) << (W-1));
+		static const T value = ~((1u << (W-1)) - 1);
 	};
 
 
