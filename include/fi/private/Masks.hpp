@@ -39,7 +39,7 @@ namespace Fi {
 	 */
 	template<typename T, std::size_t W>
 	struct TMask {
-		static const T value = ~( (~T(0)) << W );
+		static const T value = (1u << W) - 1;
 	};
 
 
@@ -56,7 +56,7 @@ namespace Fi {
 
 	template<typename T, std::size_t W>
 	struct SMask<T, W, SIGNED> {
-		static const T value = (~T(0)) << (W-1);
+		static const T value = ~((1u << (W - 1)) - 1);
 	};
 
 	template<typename T, std::size_t W>
@@ -74,7 +74,7 @@ namespace Fi {
 	 */
 	template<typename T, std::size_t W, std::size_t F>
 	struct FMask {
-		static const T value = (F == 8*sizeof(T)) ? ~T(0) : ~(~T(0) << F);
+		static const T value = (F == 8*sizeof(T)) ? ~T(0) : ((1u << F) - 1);
 	};
 
 }
