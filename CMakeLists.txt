@@ -1,6 +1,6 @@
-project(LibFi CXX)
+cmake_minimum_required(VERSION 3.28 FATAL_ERROR)
 
-cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
+project(LibFi CXX)
 
 OPTION (BUILD_EXAMPLES "Build example programs." FALSE)
 OPTION (BUILD_TESTING "Build unit tests." TRUE)
@@ -12,7 +12,8 @@ set(INCLUDE_INSTALL_DIR
   "Directory where the library will be installed"
 )
 
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/fi DESTINATION ${INCLUDE_INSTALL_DIR})
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/fi DESTINATION
+  ${INCLUDE_INSTALL_DIR})
 
 IF (BUILD_EXAMPLES)
 	add_subdirectory(examples)

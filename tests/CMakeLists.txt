@@ -4,7 +4,8 @@ set(REQ_BOOST_LIBS ${REQ_BOOST_LIBS} unit_test_framework)
 
 set(CMAKE_CXX_FLAGS "-Wall -pedantic -Wextra")
 
-find_package(Boost 1.39.0 REQUIRED ${REQ_BOOST_LIBS})
+find_package(Boost REQUIRED CONFIG COMPONENTS ${REQ_BOOST_LIBS})
+#find_package(Boost 1.39.0 REQUIRED ${REQ_BOOST_LIBS})
 
 link_directories(${Boost_LIBRARY_DIRS})
 include_directories(${Boost_INCLUDE_DIRS})
