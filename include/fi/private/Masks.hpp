@@ -26,8 +26,35 @@
 #include "Fi.hpp"
 
 #include <cstddef>
+#include <cstdint>
+#include <stdint.h>
 
 namespace Fi {
+
+    /**\internal
+	 *\brief Creates a mask with zeros in the NUM_LSB_ZEROS least significant
+	 * bits and ones in the most significant bits.
+
+	 *\tparam T Underlying type.
+	 *\tparam NUM_LSB_ZEROS number of least significant bits set to zeros.
+	 */
+    template<typename T, std::size_t NUM_LSB_ZEROS>
+    struct MSB_ONES_LSB_ZEROS {
+        static const T value = static_cast<T>((~static_cast<uint64_t>(0)) << NUM_LSB_ZEROS);
+    };
+
+    /**\internal
+	 *\brief Creates a mask with ones in the NUM_LSB_ONES least significant
+	 * bits and zeros in the most significant bits.
+
+	 *\tparam T Underlying type.
+	 *\tparam NUM_LSB_ONES number of least significant bits set to ones.
+	 */
+    template<typename T, std::size_t NUM_LSB_ONES>
+    struct MSB_ZEROS_LSB_ONES {
+        static const T value = static_cast<T>(~((~static_cast<uint64_t>(0)) << NUM_LSB_ONES));
+    };
+
 	/**\internal
 	 *\brief Calculates the mask needed to select the entire fixed-point number.
 
@@ -39,7 +66,7 @@ namespace Fi {
 	 */
 	template<typename T, std::size_t W>
 	struct TMask {
-		static const T value = ~( (~T(0)) << W );
+		static const T value = MSB_ZEROS_LSB_ONES<T, W>::value;
 	};
 
 
@@ -56,7 +83,7 @@ namespace Fi {
 
 	template<typename T, std::size_t W>
 	struct SMask<T, W, SIGNED> {
-		static const T value = (~T(0)) << (W-1);
+		static const T value = MSB_ONES_LSB_ZEROS<T, W -1>::value;
 	};
 
 	template<typename T, std::size_t W>
@@ -74,7 +101,9 @@ namespace Fi {
 	 */
 	template<typename T, std::size_t W, std::size_t F>
 	struct FMask {
-		static const T value = (F == 8*sizeof(T)) ? ~T(0) : ~(~T(0) << F);
+		static const T value = (F == 8*sizeof(T)) ?
+		static_cast<T>(~static_cast<uint64_t>(0))
+		: MSB_ZEROS_LSB_ONES<T, F>::value;
 	};
 
 }

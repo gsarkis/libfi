@@ -25,6 +25,8 @@
 
 #include "Fi.hpp"
 
+#include "Masks.hpp"
+
 #include <cstddef>
 
 namespace Fi {
@@ -49,7 +51,7 @@ namespace Fi {
 	};
 
 	template<typename T, std::size_t W> struct MinVal<T, W, SIGNED> {
-		static const T value = (T(1) << (W-1)) | (T(-1) << (W-1));
+		static const T value = MSB_ONES_LSB_ZEROS<T, W - 1>::value;
 	};
 
 
@@ -69,12 +71,12 @@ namespace Fi {
 
 	template<typename T, std::size_t W>
 	struct MaxVal<T, W, UNSIGNED> {
-		static const T value = (T(1) << W) - 1;
+		static const T value = MSB_ZEROS_LSB_ONES<T, W>::value;
 	};
 
 	template<typename T, std::size_t W>
 	struct MaxVal<T, W, SIGNED> {
-		static const T value = (T(1) << (W-1)) - 1;
+		static const T value = MSB_ZEROS_LSB_ONES<T, W-1>::value;
 	};
 
 	template<typename T, Signedness S>
